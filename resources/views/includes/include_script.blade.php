@@ -26,3 +26,29 @@
 	<!-- /theme JS files -->
 
     <script src="{{ URL('global_assets/js/main/bootstrap.bundle.min.js') }}"></script>
+
+
+
+<!-- Theme JS files -->
+<script src="{{ URL('global_assets/js/plugins/extensions/jquery_ui/core.min.js') }}"></script>
+<script src="{{ URL('global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
+<script src="{{ URL('global_assets/js/plugins/notifications/pnotify.min.js') }}"></script>
+<script src="{{ URL('global_assets/js/plugins/notifications/noty.min.js') }}"></script>
+<script src="{{ URL('global_assets/js/plugins/notifications/jgrowl.min.js') }}"></script>
+
+
+<script src="{{ URL('global_assets/js/demo_pages/colors_primary.js') }}"></script>
+
+
+
+
+
+
+<!-- Theme JS files -->
+
+
+<script src="{{ URL('global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
+
+
+<script src="{{ URL('global_assets/js/demo_pages/form_checkboxes_radios.js') }}"></script>
+<!-- /theme JS files -->

@@ -6,6 +6,9 @@ use App\Http\Controllers\MusteriController;
 use App\Http\Controllers\ProjeControllerer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProjeGorevleriController;
+use App\Models\ProjeGorevleri;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +22,8 @@ use Illuminate\Http\Request;
 */
 
 //*MusteriCcontroller
+
+Route::resource('/', DashboardController::class);
 
 /*
 Route::get('/', function () {
@@ -34,3 +39,7 @@ Route::resource('/musteri', MusteriController::class);
 
 Route::resource('/proje', ProjeControllerer::class);
 
+
+//Proje Gorev
+
+Route::resource('/projegorev', ProjeGorevleriController::class);

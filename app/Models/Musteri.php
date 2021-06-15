@@ -15,4 +15,8 @@ class Musteri extends Model
 
     protected $fillable = ['id','ad','soyad','tel_no','mail_adresi','il','ilce'];
 
+    public function projeModel(){
+        return $this->hasMany(Proje::class);
+    }
+
 }

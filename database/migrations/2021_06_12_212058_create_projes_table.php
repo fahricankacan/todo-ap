@@ -18,10 +18,11 @@ class CreateProjesTable extends Migration
             $table->string('proje_adi');
             $table->date('alim_tarihi');
             $table->date('teslim_tarihi');
-            $table->longText('proje_aciklamasi');
-            $table->integer('sozlesme_id');
-            $table->integer('musteri_id');
+            $table->longText('proje_aciklamasi');            
+            $table->unsignedInteger('musteri_id');
+            $table->boolean('aktif_pasif')->default(1);
             $table->timestamps();
+           // $table->foreign('musteri_id')->references('id')->on('musteris');
         });
     }
 

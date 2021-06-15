@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+
 use Illuminate\Support\ServiceProvider;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+     
+
+
+        $this->app->singleton(\App\Bussiness\Abstract\IProjeService::class,function(){
+            return new \App\Bussiness\Concrate\ProjeManager();
+        });
+
+
+        $this->app->singleton(\App\Bussiness\Abstract\IMusteriService::class,function(){
+            return new \App\Bussiness\Concrate\MusteriManager();
+        });
     }
 
     /**

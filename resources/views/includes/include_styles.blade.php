@@ -7,3 +7,10 @@
 <link href="{{ URL('assets/css/components.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ URL('assets/css/colors.min.css') }}" rel="stylesheet" type="text/css">
 <!-- /global stylesheets -->
+
+
+
+	
+	
+	
+	
