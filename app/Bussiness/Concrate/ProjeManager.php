@@ -19,7 +19,7 @@ class ProjeManager implements IProjeService
         return $AllProjects;
     }
 
-    public function Add( $request)
+    public function Add($request)
     {
 
         $result = Proje::create(
@@ -38,54 +38,54 @@ class ProjeManager implements IProjeService
         );
     }
 
-    public function Update( $proje,$id)
+    public function Update($proje, $id)
     {
-        $proje->update(
+        $proje = Proje::where('id', $id)->update(
             array(
                 'proje_adi' => $proje->proje_adi,
                 'proje_aciklamasi' => $proje->proje_aciklamasi,
                 'alim_tarihi' => $proje->baslangic_tarihi,
                 'teslim_tarihi' => $proje->bitis_tarihi,
                 'musteri_id' => $proje->musteri_id,
-                'aktif_pasif' =>$proje->aktif_pasif,
+                'aktif_pasif' => $proje->aktif_pasif,
             )
         );
 
         return array(
-            'Succes'=>"Proje güncellendi."
+            'Succes' => "Proje güncellendi."
         );
     }
 
-    public function Delete( $proje)
+    public function Delete($proje)
     {
         $proje->delete();
 
         return array(
-            'Succes'=>"Proje silindi."
+            'Succes' => "Proje silindi."
         );
-
     }
 
     public function GetById($id)
     {
 
-       
+
 
         $result = Proje::find($id);
         return array(
-            'Success' => "Proje getirild",  
+            'Success' => "Proje getirild",
             'result' => $result
 
         );
     }
 
-    public function GetProjectWithMusteriNameById($id){
+    public function GetProjectWithMusteriNameById($id)
+    {
 
         $result = DB::table('projes')
-        ->join('musteris','projes.musteri_id','=','musteris.id')
-        ->where('projes.id','=',$id)        
-        ->get();
- 
+            ->join('musteris', 'projes.musteri_id', '=', 'musteris.id')
+            ->where('projes.id', '=', $id)
+            ->get();
+
         return $result;
         /*
         $result = Proje::find($id);
@@ -106,7 +106,8 @@ class ProjeManager implements IProjeService
        */
     }
 
-    public function GetProjectWithMusteriName(){
+    public function GetProjectWithMusteriName()
+    {
 
 
         /*
@@ -127,10 +128,10 @@ class ProjeManager implements IProjeService
         // TODO:JOİN İŞLEMİ İLE YAP RELETİONSHİP İLE UĞRAŞMA 
         //$result = Proje::find(1)->musteri;
 
-       $result = DB::table('projes')
-       ->join('musteris','projes.musteri_id','=','musteris.id')
-       //->orderBy('projes.id','asc')
-       ->get();
+        $result = DB::table('projes')
+            ->join('musteris', 'projes.musteri_id', '=', 'musteris.id')
+            //->orderBy('projes.id','asc')
+            ->get();
 
         return $result;
     }

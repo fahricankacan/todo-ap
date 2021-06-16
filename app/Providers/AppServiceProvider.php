@@ -26,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(\App\Bussiness\Abstract\IMusteriService::class,function(){
             return new \App\Bussiness\Concrate\MusteriManager();
         });
+
+
+        $this->app->singleton(\App\Bussiness\Abstract\IPersonelService::class,function(){
+            return new \App\Bussiness\Concrate\PersonelManager();
+        });
     }
 
     /**

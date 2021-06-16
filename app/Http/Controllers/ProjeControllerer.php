@@ -118,4 +118,10 @@ class ProjeControllerer extends Controller
         Proje::find($id)->destroy();
         return redirect('/musteri');
     }
+
+
+    public function planIndex(){
+
+        return view('proje.plan');
+    }
 }
