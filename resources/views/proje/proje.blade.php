@@ -17,9 +17,6 @@
         <tbody>
             @foreach ($projeler as $proje)
                 <tr>
-
-
-
                     <td>{{ $proje->proje_adi }}</td>
                     <td>{{ $proje->ad . ' ' . $proje->soyad }}</td>
                     <td> {{ $proje->alim_tarihi }}</td>
@@ -37,7 +34,7 @@
                                     <i class="icon-menu9"></i>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-menu dropdown-menu-right">                                  
                                     <a href="{{ URL::to('proje/'. $proje->id)}} " class="dropdown-item"><i class="icon-file-pdf"></i> İncele</a>
                                     <a href="{{ URL::to('proje/'. $proje->id. '/edit')}}" class="dropdown-item"><i class="icon-file-excel"></i> Güncelle</a>
                                     <form action="/proje/{{ $proje->id }}" method="POST">
@@ -45,7 +42,7 @@
                                         @method('delete')
                                         <button type="submit" class="dropdown-item"><i class="icon-trash"></i> Sil</button>
                                     </form>
-                                  
+
                                 </div>
                             </div>
                         </div>

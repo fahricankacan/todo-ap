@@ -8,8 +8,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PersonelController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProjeGorevleriController;
+use App\Http\Controllers\ProjePlanController;
+use App\Http\Controllers\ProjePlanlariController;
 use App\Models\ProjeGorevleri;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,18 +42,30 @@ Route::resource('/musteri', MusteriController::class);
 
 //Proje
 
+
+
 Route::resource('/proje', ProjeControllerer::class);
 
-Route::get('proje/plan', function () {
-    return view('proje.plan');
-    
-});
 
+/**
+ * 
+ * *PlanController
+*/
+Route::get('/plan/{id}',[PlanController::class,'index'])->name('plan.index');
+
+Route::get('/projeler',[PlanController::class,'a']);
+
+
+
+// Route::get('/proje/{proje}/plan', function ($proje) {
+//     return $proje;
+// });
+// Route::post('proje/plan', function () {
+//     return view('proje.plan');
+    
+// });
 
 //Proje Gorev
-
-Route::resource('/projegorev', ProjeGorevleriController::class);
-
 
 Route::resource('/personel',PersonelController::class);
 

@@ -8,7 +8,7 @@
 <!-- Theme JS files -->
 <script src= "{{ URL('global_assets/js/plugins/visualization/d3/d3.min.js' )}}"></script>
 <script src="{{ URL('global_assets/js/plugins/visualization/d3/d3_tooltip.js') }}"></script>
-<script src="{{ URL('global_assets/js/plugins/forms/styling/switchery.min.js') }}"></script>
+{{-- <script src="{{ URL('global_assets/js/plugins/forms/styling/switchery.min.js') }}"></script> --}}
 <script src="{{ URL('global_assets/js/plugins/forms/selects/bootstrap_multiselect.js') }}"></script>
 <script src="{{ URL('global_assets/js/plugins/ui/moment/moment.min.js' )}}"></script>
 <script src="{{ URL('global_assets/js/plugins/pickers/daterangepicker.js') }}"></script>
@@ -39,8 +39,10 @@
 
 <script src="{{ URL('global_assets/js/demo_pages/colors_primary.js') }}"></script>
 
-
-
+<!-- Theme JS files -->
+<script src="{{ URL('global_assets/js/demo_pages/jqueryui_interactions.js') }}"></script>
+<script src="{{ URL('global_assets/js/plugins/extensions/jquery_ui/interactions.min.js') }}"></script>
+<script src="{{ URL('global_assets/js/plugins/extensions/jquery_ui/touch.min.js') }}"></script>
 
 
 
@@ -52,3 +54,5 @@
 
 <script src="{{ URL('global_assets/js/demo_pages/form_checkboxes_radios.js') }}"></script>
 <!-- /theme JS files -->
+
+

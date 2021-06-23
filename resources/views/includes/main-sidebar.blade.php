@@ -78,7 +78,7 @@
                         </li>
                         <li class="nav-item"><a href="{{ route('proje.create') }}" class="nav-link active">
                                 Oluştur</a></li>
-
+                        
                         <li class="nav-item"><a href="#" class="nav-link active">
                                 Proje Planlaması</a></li>
                         <li class="nav-item"><a href="#" class="nav-link active">

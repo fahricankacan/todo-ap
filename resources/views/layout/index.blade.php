@@ -54,7 +54,7 @@
 			@include('includes.footer')
 
 			<!-- /footer -->
-
+			@routes
 		</div>
 		<!-- /main content -->
 

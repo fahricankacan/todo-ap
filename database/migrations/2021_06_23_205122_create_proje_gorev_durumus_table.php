@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjeGorevlerisTable extends Migration
+class CreateProjeGorevDurumusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateProjeGorevlerisTable extends Migration
      */
     public function up()
     {
-        Schema::create('proje_gorevleris', function (Blueprint $table) {
-            $table->id();
+        Schema::create('proje_gorev_durumus', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('gorev_durumu');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateProjeGorevlerisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proje_gorevleris');
+        Schema::dropIfExists('proje_gorev_durumus');
     }
 }
