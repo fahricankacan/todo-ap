@@ -4,109 +4,77 @@
 @section('content')
 
 
+
     <div class="card h-100 ">
         <div class="card-body">
             <!----------------LİSTLER-------------------------->
+            <div class="row ">
+                <div class="col-sm-4">
+                    <div class=" text-center  ">
+                        <h5> Yapılacaklar </h5>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <h1 class="text-center">Yapılıyor</h1>
+                    <hr>
+                </div>
+                <div class="col-sm-4">
+                    <h1 class="text-center">Bitti</h1>
+                    <hr>
+                </div>
+            </div>
             <div class=row>
                 <!--------------COLON 1 ------------------------->
                 <div class="col-sm-4 ">
-                    {{-- <div class="card-header text-center  ">
-                        <h5> Yapılacaklar </h5>
-                        <hr>
-                    </div> --}}
+                    {{--  --}}
+
                     <div class="card-body ">
-                        <h1 class="text-center">To-do</h1>
-                        <hr>
+
+
+                        {{-- <h1 class="text-center">To-do</h1>
+                            <hr> --}}
                         <ul class="list-group droptrue px-2 bg-light" id="sortable1">
-                            <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1">
-                                <div class="card-body">
-                                    <p class="fs-3"><b>Plan sayfasını düzenlemek </b></p>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <span class="text-success p-1 ">5 gün</span>
-                                        <!--gün sayısına göre renk değişecek. -->
 
-                                        <span class="bg-blue-800 rounded-circle  p-1"> <i title="Bünyamin Görken">B.G</i></>
-                                    </div>
-                                    {{-- <div class="d-flex w-100 justify-content-end">
-                                      <span class="badge bg-danger-400 text-wrap">Acil</span><!--gün sayısına göre renk değişecek. -->
-                                      
-                                      
-                                  </div> --}}
-                                </div>
-                            </li>
-                            <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1">
-                                <div class="card-body">
-                                    <p class="fs-3"><b>Plan sayfasını düzenlemek </b></p>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <span class="text-success p-1 ">5 gün</span>
-                                        <!--gün sayısına göre renk değişecek. -->
+                            @empty(!$bir)
 
-                                        <span class="bg-blue-800 rounded-circle  p-1"> <i title="Bünyamin Görken">B.G</i></>
-                                    </div>
-                                    {{-- <div class="d-flex w-100 justify-content-end">
-                                    <span class="badge bg-danger-400 text-wrap">Acil</span><!--gün sayısına göre renk değişecek. -->
-                                    
-                                    
-                                </div> --}}
-                                </div>
-                            </li>
-                            <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1">
-                                <div class="card-body">
-                                    <p class="fs-3"><b>Plan sayfasını düzenlemek </b></p>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <span class="text-success p-1 ">5 gün</span>
-                                        <!--gün sayısına göre renk değişecek. -->
 
-                                        <span class="bg-blue-800 rounded-circle  p-1"> <i title="Bünyamin Görken">B.G</i></>
-                                    </div>
-                                    {{-- <div class="d-flex w-100 justify-content-end">
-                                  <span class="badge bg-danger-400 text-wrap">Acil</span><!--gün sayısına göre renk değişecek. -->
-                                  
-                                  
-                              </div> --}}
-                                </div>
-                            </li>
-                            <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1">
-                                <div class="card-body">
-                                    <p class="fs-3"><b>Plan sayfasını düzenlemek </b></p>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <span class="text-success p-1 ">5 gün</span>
-                                        <!--gün sayısına göre renk değişecek. -->
+                                @foreach ($bir as $card)
 
-                                        <span class="bg-blue-800 rounded-circle  p-1"> <i title="Bünyamin Görken">B.G</i></>
-                                    </div>
-                                    {{-- <div class="d-flex w-100 justify-content-end">
-                                <span class="badge bg-danger-400 text-wrap">Acil</span><!--gün sayısına göre renk değişecek. -->
-                                
-                                
-                            </div> --}}
-                                </div>
-                            </li>
-                            <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1">
-                                <div class="card-body">
-                                    <p class="fs-3"><b>Plan sayfasını düzenlemek </b></p>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <span class="text-success p-1 ">5 gün</span>
-                                        <!--gün sayısına göre renk değişecek. -->
+                                    <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1">
+                                        <div class="card-body">
+                                            <p class="fs-3"><b>{{ $card->gorev_adi }} </b></p>
+                                            <div class="d-flex w-100 justify-content-between">
+                                                @empty(!$card->teslim_tarihi)
+                                                <?php $day=Carbon\Carbon::parse( $card->alim_tarihi)->diffInDays($card->teslim_tarihi );?>
+                                                <span class="<?php if($day>0){echo "text-success" ;} else {echo "text-danger";}?> p-1 "> <?php echo $day; ?> Gün </span>
+                                                <!--gün sayısına göre renk değişecek. -->
+                                                @endempty
+                                               
+                                                
+                                                    @empty(!App\Models\Personel::find($card->personel_id))
+                                                    <span class="bg-blue-800 rounded-circle  p-1"> 
+                                                    
+                                                    <?php $personel = App\Models\Personel::find($card->personel_id); $name = $personel->ad ." ". $personel->soyad;    
+                                                        $first = substr($personel->ad,0,1); $second = substr($personel->soyad,0,1); $firstSecond=$first . "." . $second;
+                                                    ?>  
+                                                    <i title="{{ $name }}">{{ $firstSecond }}</i>
+                                                    @endempty
+                                            </div>
+                                        </div>
+                                    </li>
 
-                                        <span class="bg-blue-800 rounded-circle  p-1"> <i title="Bünyamin Görken">B.G</i></>
-                                    </div>
-                                    {{-- <div class="d-flex w-100 justify-content-end">
-                              <span class="badge bg-danger-400 text-wrap">Acil</span><!--gün sayısına göre renk değişecek. -->
-                              
-                              
-                          </div> --}}
-                                </div>
-                            </li>
-
-                           
-
+                                @endforeach
+                            @endempty
                         </ul>
+
+
                         <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-1">
 
-                            <button onclick="myFunction()" class="btn btn-outline-secondary " type="button"
-                                id="eklebtn"><i class="fa fa-plus-circle mx-1"></i>Ekle</button>
+                            <button onclick="myFunction()" class="btn btn-outline-secondary " type="button" id="eklebtn"><i
+                                    class="fa fa-plus-circle mx-1"></i>Ekle</button>
                         </div>
+
                     </div>
                 </div>
                 <!--------------/COLON 1 ------------------------->
@@ -115,57 +83,30 @@
 
                     <!--------------COLON 2 ------------------------->
                     <div class="card-body ">
-                        <h1 class="text-center">Yapılıyor</h1>
-                        <hr>
+
                         <ul class="list-group droptrue px-2 bg-light" id="sortable2">
-                            <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1">
-                                <div class="card-body">
-                                    <p class="fs-3"><b>Plan sayfasını düzenlemek </b></p>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <span class="text-success p-1 ">5 gün</span>
-                                        <!--gün sayısına göre renk değişecek. -->
 
-                                        <span class="bg-blue-800 rounded-circle  p-1"> <i title="Bünyamin Görken">B.G</i></>
-                                    </div>
-                                    {{-- <div class="d-flex w-100 justify-content-end">
-                                  <span class="badge bg-danger-400 text-wrap">Acil</span><!--gün sayısına göre renk değişecek. -->
-                                  
-                                  
-                              </div> --}}
-                                </div>
-                            </li>
-                            <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1">
-                                <div class="card-body">
-                                    <p class="fs-3"><b>Plan sayfasını düzenlemek </b></p>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <span class="text-success p-1 ">5 gün</span>
-                                        <!--gün sayısına göre renk değişecek. -->
+                            @empty(!$iki)
 
-                                        <span class="bg-blue-800 rounded-circle  p-1"> <i title="Bünyamin Görken">B.G</i></>
-                                    </div>
-                                    {{-- <div class="d-flex w-100 justify-content-end">
-                                <span class="badge bg-danger-400 text-wrap">Acil</span><!--gün sayısına göre renk değişecek. -->
-                                
-                                
-                            </div> --}}
-                                </div>
-                            </li>
-                            <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1">
-                                <div class="card-body">
-                                    <p class="fs-3"><b>Plan sayfasını düzenlemek </b></p>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <span class="text-success p-1 ">5 gün</span>
-                                        <!--gün sayısına göre renk değişecek. -->
 
-                                        <span class="bg-blue-800 rounded-circle  p-1"> <i title="Bünyamin Görken">B.G</i></>
+                                @foreach ($iki as $card)
+
+
+
+                                <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1">
+                                    <div class="card-body">
+                                        <p class="fs-3"><b>{{ $card->gorev_adi }} </b></p>
+                                        <div class="d-flex w-100 justify-content-between">
+                                            
+                                            <span class="text-success p-1 "> <?php echo Carbon\Carbon::parse( $card->alim_tarihi)->diffInDays($card->teslim_tarihi );?>  </span>
+                                            <!--gün sayısına göre renk değişecek. -->
+                                            <span class="bg-blue-800 rounded-circle  p-1"> <i
+                                                    title="Bünyamin Görken">B.G</i></>
+                                        </div>
                                     </div>
-                                    {{-- <div class="d-flex w-100 justify-content-end">
-                              <span class="badge bg-danger-400 text-wrap">Acil</span><!--gün sayısına göre renk değişecek. -->
-                              
-                              
-                          </div> --}}
-                                </div>
-                            </li>
+                                </li>
+                                @endforeach
+                            @endempty
                         </ul>
                     </div>
                     <!--------------/COLON 2 ------------------------->
@@ -174,42 +115,24 @@
                 <!--------------COLON 3 ------------------------->
                 <div class="col-sm-4 ">
                     <div class="card-body ">
-                        <h1 class="text-center">Bitti</h1>
-                        <hr>
                         <ul class="list-group droptrue px-2 bg-light" id="sortable3">
-                            <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1">
-                                <div class="card-body">
-                                    <p class="fs-3"><b>Plan sayfasını düzenlemek </b></p>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <span class="text-success p-1 ">5 gün</span>
-                                        <!--gün sayısına göre renk değişecek. -->
+                            @empty(!$uc)
+                                @foreach ($uc as $card)
 
-                                        <span class="bg-blue-800 rounded-circle  p-1"> <i title="Bünyamin Görken">B.G</i></>
+                                <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1">
+                                    <div class="card-body">
+                                        <p class="fs-3"><b>{{ $card->gorev_adi }} </b></p>
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <span class="text-success p-1 "> <?php echo Carbon\Carbon::parse( $card->alim_tarihi)->diffInDays($card->teslim_tarihi );?></span>
+                                            <!--gün sayısına göre renk değişecek. -->
+                                            <span class="bg-blue-800 rounded-circle  p-1"> <i
+                                                    title="Bünyamin Görken">B.G</i></>
+                                        </div>
                                     </div>
-                                    {{-- <div class="d-flex w-100 justify-content-end">
-                                  <span class="badge bg-danger-400 text-wrap">Acil</span><!--gün sayısına göre renk değişecek. -->
-                                  
-                                  
-                              </div> --}}
-                                </div>
-                            </li>
-                            <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1">
-                                <div class="card-body">
-                                    <p class="fs-3"><b>Plan sayfasını düzenlemek </b></p>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <span class="text-success p-1 ">5 gün</span>
-                                        <!--gün sayısına göre renk değişecek. -->
+                                </li>
 
-                                        <span class="bg-blue-800 rounded-circle  p-1"> <i title="Bünyamin Görken">B.G</i></>
-                                    </div>
-                                    {{-- <div class="d-flex w-100 justify-content-end">
-                                <span class="badge bg-danger-400 text-wrap">Acil</span><!--gün sayısına göre renk değişecek. -->
-                                
-                                
-                            </div> --}}
-                                </div>
-                            </li>
-
+                                @endforeach
+                            @endempty
                         </ul>
                     </div>
                     <!--------------/COLON 3 ------------------------->
@@ -227,41 +150,53 @@
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="/" method="POST"> 
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModal">Proje Başlığı</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                       
-                            <div class="mb-3">
-                              <label for="exampleInputEmail1" class="form-label">Email address</label>
-                              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    <form action="/" method="POST">
+                        <div class="modal-header">
+                            <h5>Görev Bilgileri</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="mb-3"> <label for="gorev_adi" class="form-label">Görev Başlığı</label>
+                                <input type="text" class="form-control" id="gorev_adi" name="gorev_adi">
                             </div>
                             <div class="mb-3">
-                              <label for="exampleInputPassword1" class="form-label">Password</label>
-                              <input type="password" class="form-control" id="exampleInputPassword1">
+                                <label for="gorev_aciklamasi" class="form-label">Görev Açıklaması</label>
+                                <textarea class="form-control" id="gorev_aciklamasi" rows="3"
+                                    name="gorev_aciklamasi"></textarea>
                             </div>
-                            <div class="mb-3 form-check">
-                              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            <div class="mb-3">
+                                <div class="form-group">
+                                    <label> Teslim Tarihi</label>
+                                    <input class="form-control form-control-lg" type="date" placeholder="Teslim Tarihi"
+                                        name="teslim_tarihi">
+                                </div>
                             </div>
-                          
-                          
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit"  class="btn btn-primary">Save changes</button>
-                    </div>
+                            <div class="mb-3 ">
+                                <label for="personel_id" class="form-label">Görevli Kişi</label>
+                                <input class="form-control" list="datalistOptions" id="personel_id"
+                                    placeholder="Personel seç">
+                                <datalist id="datalistOptions">
+                                    <option value="Fahrican Kaçan">
+                                    <option value="Şükrü Can Köseoğlu">
+                                    <option value="Bünyamin Görken">
+                                    <option value="Hüseyin">
+                                    <option value="Chicago">
+                                </datalist>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Onayla</button>
+                        </div>
+
                     </form>
                 </div>
             </div>
         </div>
 
 
+        <script>$('') <script> 
 
         <script src="{{ URL::asset('assets/js/plan/dropdrag.js') }}"></script>
         <script src="{{ URL::asset('assets/js/plan/button.js') }}"></script>
