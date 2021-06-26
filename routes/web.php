@@ -55,6 +55,13 @@ Route::get('/plan/{id}',[PlanController::class,'index'])->name('plan.index');
 
 Route::get('/projeler',[PlanController::class,'a']);
 
+Route::post('/kartolustur/{id}',[PlanController::class,'CreateNewCard']);
+
+Route::post('/update/{id}',[PlanController::class,'UpdateCard']);
+
+Route::get('jsonplan/{id}', [PlanController::class,'GetPlanWithJson']);
+
+Route::get('/sil/{id}',[PlanController::class],'Delete');
 
 
 // Route::get('/proje/{proje}/plan', function ($proje) {
