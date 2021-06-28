@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 namespace App\Bussiness\Concrate;
@@ -8,15 +8,26 @@ use App\Models\ProjeGorevDurumu;
 use App\Models\ProjeGorevleri;
 use Illuminate\Database\Eloquent\Model;
 
-class ProjeGorevDurumuManager implements IProjeGorevDurmu{
+class ProjeGorevDurumuManager implements IProjeGorevDurmu
+{
 
-    public function CreateIfDefaultValuesDoesntExist(){
+    public function CreateIfDefaultValuesDoesntExist()
+    {
 
-        $projeGorevleri = ProjeGorevDurumu::Create(
-            ['gorev_durumu' =>'todo'],
-            ['gorev_durumu'=>'inprogress'],
-            ['gorev_durumu' =>'done']
-        ); 
+
+        $count = ProjeGorevDurumu::count();
+
+        if ($count != 3) {
+            $projeGorevleri = ProjeGorevDurumu::Create(
+                ['gorev_durumu' => 'todo']
+            );
+
+            ProjeGorevDurumu::Create(
+                ['gorev_durumu' => 'inprogress']
+            );
+            ProjeGorevDurumu::Create(
+                ['gorev_durumu' => 'done']
+            );
+        }
     }
-
 }

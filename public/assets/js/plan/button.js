@@ -101,7 +101,7 @@ $('li').click(async function(){
           console.log(response)
           $('#updateModal').modal('hide')
           alert("data saved");
-         // $("#sortable1").load(window.location.href + "#sortable1" )
+         // $("#card-body").load(window.location.href + "#card-body" )
           
         },
         error:function(error){

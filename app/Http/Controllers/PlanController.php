@@ -37,7 +37,7 @@ class PlanController extends Controller
 
     public function a()
     {
-
+        $this->_projeGorevDurumuService->CreateIfDefaultValuesDoesntExist();
         $projeler = Proje::all();
 
         return view('plan.projeler')->with('projeler', $projeler);

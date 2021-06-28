@@ -38,7 +38,7 @@
 
                             @empty(!$bir)
 
-                            <div class="kolon1">
+                            
                                 @foreach ($bir as $card)
 
                                 
@@ -76,7 +76,7 @@
                                     </li>
 
                                 @endforeach
-                            </div>
+                            
                             @endempty
                         </ul>
 

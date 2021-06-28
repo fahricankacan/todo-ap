@@ -40,6 +40,14 @@ class AppServiceProvider extends ServiceProvider
             return new \App\Bussiness\Concrate\ProjeGorevleriManager();
         });
 
+        $this->app->singleton(\App\Bussiness\Abstract\IBilgiBankasiActivity::class,function(){
+            return new \App\Bussiness\Concrate\BilgiBankasiActivityManager();
+        });
+
+        $this->app->singleton(\App\Bussiness\Abstract\IBilgiBankasi::class,function(){
+            return new \App\Bussiness\Concrate\BilgiBankasiManager();
+        });
+
     }
 
     /**

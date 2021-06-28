@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BilgiBankasiController;
 use App\Http\Controllers\denemecontroller;
 use App\Http\Controllers\musteri;
 use App\Http\Controllers\MusteriController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProjeGorevleriController;
 use App\Http\Controllers\ProjePlanController;
 use App\Http\Controllers\ProjePlanlariController;
+use App\Models\BilgiBankasi;
 use App\Models\ProjeGorevleri;
 
 
@@ -48,6 +50,15 @@ Route::resource('/proje', ProjeControllerer::class);
 
 
 /**
+ * *BilgiBankasi Controller
+ */
+
+
+Route::resource('/bilgibankasi', BilgiBankasiController::class);
+
+
+
+/**
  * 
  * *PlanController
 */
@@ -62,6 +73,9 @@ Route::post('/update/{id}',[PlanController::class,'UpdateCard']);
 Route::get('jsonplan/{id}', [PlanController::class,'GetPlanWithJson']);
 
 Route::get('/sil/{id}',[PlanController::class],'Delete');
+
+
+
 
 
 // Route::get('/proje/{proje}/plan', function ($proje) {
