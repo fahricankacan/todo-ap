@@ -95,7 +95,7 @@ $('li').click(async function(){
         
         type:"POST",
         url:"/update/"+lastCliclkedCard,
-        data:$('#updateFormm').serialize(),
+        data: FormData, //$('#updateFormm').serialize(),
         success:function(response){
           console.log($('#updateFormm').serialize())
           console.log(response)

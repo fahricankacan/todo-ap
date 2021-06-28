@@ -35,4 +35,12 @@ class BilgiBankasiManager implements IBilgiBankasi
         BilgiBankasi::where('id','=',$id)->update(['activity_id'=>$data["durum"]]);
     }
 
+
+    public function AddBilgi($file,$data){
+
+        // BilgiBankasi::Create([
+        //     ''
+        // ])
+    }
+
 }

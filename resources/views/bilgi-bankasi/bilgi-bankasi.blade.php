@@ -47,7 +47,8 @@
             </div>
 
             <div>
-                <a href="#" class="btn bg-teal-400"><i class="icon-statistics mr-2"></i> Yeni Bilgi</a>
+                <a href="#" class="btn bg-teal-400" id="yeni-bilgi-olustur-button"><i class="icon-plus3 mr-2"></i> Yeni
+                    Bilgi</a>
             </div>
         </div>
 
@@ -157,11 +158,7 @@
 
 
                     @empty(!$bilgiler['resolved'])
-
-
                         @foreach ($bilgiler['resolved'] as $resolved)
-
-
                             <tr id="deneme-2">
                                 <td class="text-center">
                                     <h6 class="mb-0"><i class="icon-dash"></i></h6>
@@ -288,19 +285,19 @@
                                             <div class="dropdown-menu dropdown-menu-right">
 
 
-                                                <a href="#" class="dropdown-item cozuldu" id="{{ $closed->id }}"><i class="icon-checkmark3 text-success"></i>
+                                                <a href="#" class="dropdown-item cozuldu" id="{{ $closed->id }}"><i
+                                                        class="icon-checkmark3 text-success"></i>
                                                     Resolve issue</a>
-                                                <a href="#" class="dropdown-item"><i class="icon-cross2 text-danger kapatildi" id="{{ $closed->id }}"></i> Close
+                                                <a href="#" class="dropdown-item"><i class="icon-cross2 text-danger kapatildi"
+                                                        id="{{ $closed->id }}"></i> Close
                                                     issue</a>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-
                         @endforeach
                     @endempty
-
                 </tbody>
             </table>
         </div>
@@ -319,76 +316,205 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label">Başlığı Sahibi:</label>
-                                <div class="col-lg-9">
-                                    <select class="form-control form-control-select2" data-fouc>
-                                        <option selected>Persoel Seç</option>
-                                        @empty(!$personeller)
-                                            @foreach ($personeller as $personel)
-                                                <option value="{{ $personel->id }}">
-                                                    {{ $personel->ad . ' ' . $personel->soyad }}</option>
-                                            @endforeach
-                                        @endempty
-                                    </select>
+                <form>
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Başlık:</label>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" placeholder="Başlık" id="yeni_bilgi_baslik"
+                                            name="baslik">
+                                    </div>
                                 </div>
-                            </div>
-
-
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label">Dosya Yükle:</label>
-                                <div class="col-lg-9">
-                                    <input type="file" class="form-input-styled" data-fouc>
-                                    <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size
-                                        2Mb</span>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Açıklama:</label>
+                                    <div class="col-lg-9">
+                                        <textarea rows="5" cols="5" class="form-control" placeholder="Açıklama ekle"
+                                            name="acilama" id="yeni_bilgi_aciklama"></textarea>
+                                    </div>
                                 </div>
-                            </div>
 
 
 
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label">Başlık:</label>
-                                <div class="col-lg-9">
-                                    <input class="form-control" placeholder="Başlık" id="bilgi_baslik">
+
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Başlığı Sahibi:</label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control form-control-select2" data-fouc id="yeni_personel_sec"
+                                            name="personel_sec">
+                                            <option selected>Persoel Seç</option>
+                                            @empty(!$personeller)
+                                                @foreach ($personeller as $personel)
+                                                    <option value="{{ $personel->id }}">
+                                                        {{ $personel->ad . ' ' . $personel->soyad }}</option>
+                                                @endforeach
+                                            @endempty
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label">Açıklama:</label>
-                                <div class="col-lg-9">
-                                    <textarea rows="5" cols="5" class="form-control" placeholder="Açıklama ekle" id="bilgi_aciklama"></textarea>
+
+
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Dosya Yükle:</label>
+                                    <div class="col-lg-9">
+                                        <input type="file" class="form-input-styled" data-fouc id="yeni_dosya_ekle"
+                                            name="dosya_ekle">
+                                        <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size
+                                            2Mb</span>
+                                    </div>
                                 </div>
+
+
+
+
                             </div>
-
-
-
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <div class="text-right">
-                        <button type="submit" class="btn btn-primary">Submit form <i
-                                class="icon-paperplane ml-2"></i></button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Submit form <i
+                                    class="icon-paperplane ml-2"></i></button>
+                        </div>
                     </div>
-                </div>
                 </form>
             </div>
         </div>
     </div>
 
+
+    <!-- Add Modal -->
+
+    <div class="modal fade" id="yenibilgiBankasiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="yeniexampleModalLabel">Bilgilendirme Kartı</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="yeniBilgiform" method="GET" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Başlık:</label>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" placeholder="Başlık" id="bilgi_baslik"
+                                            name="bilgi_basligi">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Açıklama:</label>
+                                    <div class="col-lg-9">
+                                        <textarea rows="5" cols="5" class="form-control" placeholder="Açıklama ekle"
+                                            id="bilgi_aciklama" name="bilg_aciklama"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Başlığı Sahibi:</label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control form-control-select2" name="selected_personel"
+                                            data-fouc>
+                                            <option selected>Persoel Seç</option>
+                                            @empty(!$personeller)
+                                                @foreach ($personeller as $personel)
+                                                    <option value="{{ $personel->id }}">
+                                                        {{ $personel->ad . ' ' . $personel->soyad }}</option>
+                                                @endforeach
+                                            @endempty
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Dosya Yükle:</label>
+                                    <div class="col-lg-9">
+                                        <input type="file" class="form-input-styled" id="dosya_yolu" name="dosya_yolu">
+                                        <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size
+                                            2Mb</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Submit form <i
+                                    class="icon-paperplane ml-2"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- /Add modal -->
+
     <script>
         $('.bilgi-bankasi-tr').on('click', function(event) {
             $('#bilgiBankasiModal').modal('show');
-            $('')
+
         })
 
-       
+        $('#yeni-bilgi-olustur-button').on('click', function(e) {
+            $('#yenibilgiBankasiModal').modal('show');
+
+        })
+        $(document).ready(function() {
+            $('#yeniBilgiform').on('submit', function(e) {
+                e.preventDefault();
+
+                var formElement = document.getElementById('#yeniBilgiform');
+                console.log("ben ajax post")
+                $.ajaxSetup({
+                    cache: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                // var fd = new FormData();
+                // var files = $('#dosya_yolu')[0].files[0];
+                // fd.append('file', files);
+
+                // -------------------
+
+                var form = $('#yeniBilgiform')[0]; // You need to use standard javascript object here
+                var formData = new FormData(form);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/bilgibankasi",
+                    data:formData,
+                    //fd, //$('#yeniBilgiform').serialize(),
+                    processData: false, //add this
+                    contentType: false, //and this
+                    success: function(response) {
+                        console.log($('#updateFormm').serialize())
+                        console.log(response)
+                        $('#updateModal').modal('hide')
+                        alert("data saved");
+                        // $("#card-body").load(window.location.href + "#card-body" )
+
+                    },
+                    error: function(error) {
+                        console.log(error)
+                        alert("data not saved")
+                    }
+                })
+            })
+        })
+
+
+
         $(document).ready(function() {
             $('.kapatildi').on('click', function(e) {
-               // e.preventDefault();
+                // e.preventDefault();
 
                 console.log("ben ajax post")
                 $.ajaxSetup({
@@ -401,11 +527,13 @@
 
                     type: "PATCH",
                     url: "/bilgibankasi/" + this.id,
-                    data: {durum:3},
-                    success: function(response) {                        
-                        console.log(response)                      
+                    data: {
+                        durum: 3
+                    },
+                    success: function(response) {
+                        console.log(response)
                         alert("data sended");
-                       // $("#card-body").load(window.location.href + "#card-body" )
+                        // $("#card-body").load(window.location.href + "#card-body" )
 
                     },
                     error: function(error) {
@@ -431,11 +559,13 @@
 
                     type: "PATCH",
                     url: "/bilgibankasi/" + this.id,
-                    data: {durum:2},
-                    success: function(response) {                        
-                        console.log(response)                      
+                    data: {
+                        durum: 2
+                    },
+                    success: function(response) {
+                        console.log(response)
                         alert("data sended");
-                       //  $("#card-body").load(window.location.href + "#card-body" )
+                        //  $("#card-body").load(window.location.href + "#card-body" )
 
                     },
                     error: function(error) {

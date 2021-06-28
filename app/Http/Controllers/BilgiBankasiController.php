@@ -20,6 +20,7 @@ use App\Models\Musteri;
 use App\Models\Personel;
 use App\Models\Proje;
 use App\Models\ProjeGorevleri;
+use Illuminate\Support\Facades\Storage;
 
 class BilgiBankasiController extends Controller
 {
@@ -64,9 +65,9 @@ class BilgiBankasiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+       
     }
 
     /**
@@ -77,7 +78,15 @@ class BilgiBankasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // dosya_yolu
+        $request->dosya_yolu->store('app');
+        $as = $request->file();
+
+       
+
+       // Storage::disk('local')->put($as->path(),'Contents');
+        $SA=    $request->all();
     }
 
     /**
@@ -90,7 +99,7 @@ class BilgiBankasiController extends Controller
     {
         $this->_bilgiBankasiActivty->createBilgiBankasiActivityValues();
 
-    
+
 
         //dd(BilgiBankasi::find($id)->personel->ad);
 
@@ -101,7 +110,7 @@ class BilgiBankasiController extends Controller
         return  view('bilgi-bankasi.bilgi-bankasi', [
             'bilgiler' => $this->_bilgiBankasi->GetBilgilerByProjectID($id)
 
-        ])->with('personeller',Personel::all());
+        ])->with('personeller', Personel::all());
     }
 
     /**
@@ -124,8 +133,8 @@ class BilgiBankasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->_bilgiBankasi->UpdateToSolvedOrClosded($request->all(),$id);
-        return response()->json(['success'=>'Got Simple Ajax Request.']);
+        $this->_bilgiBankasi->UpdateToSolvedOrClosded($request->all(), $id);
+        return response()->json(['success' => 'Got Simple Ajax Request.']);
     }
 
     /**
