@@ -80,7 +80,7 @@
                         @foreach ($bilgiler['active'] as $active)
 
 
-                            <tr id="deneme-1">
+                            <tr class="deneme-1" id="{{ $active->id }}">
                                 <td class="text-center">
                                     <h6 class="mb-0"><i class="icon-dash"></i></h6>
                                     {{-- <div class="font-size-sm text-muted line-height-1">hours</div> --}}
@@ -102,7 +102,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="#" class="text-default bilgi-bankasi-tr">
+                                    <a href="#" class="text-default bilgi-bankasi-tr" id="{{ $active->id }}">
                                         <div class="font-weight-semibold">[#{{ $active->id }}] <?php
                                             $slen = strlen($active->baslik);
                                             if ($slen > 75) {
@@ -159,7 +159,7 @@
 
                     @empty(!$bilgiler['resolved'])
                         @foreach ($bilgiler['resolved'] as $resolved)
-                            <tr id="deneme-2">
+                            <tr class="deneme-2" id="{{ $resolved->id }}">
                                 <td class="text-center">
                                     <h6 class="mb-0"><i class="icon-dash"></i></h6>
                                     {{-- <div class="font-size-sm text-muted line-height-1">hours</div> --}}
@@ -181,7 +181,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="#" class="text-default bilgi-bankasi-tr">
+                                    <a href="#" class="text-default bilgi-bankasi-tr" id="{{ $resolved->id }}">
                                         <div class="font-weight-semibold">[#{{ $resolved->id }}] <?php
                                             $slen = strlen($resolved->baslik);
                                             if ($slen > 75) {
@@ -236,7 +236,7 @@
 
                     @empty(!$bilgiler['closed'])
                         @foreach ($bilgiler['closed'] as $closed)
-                            <tr id="deneme-3">
+                            <tr class="deneme-3" id="{{ $closed->id }}">
                                 <td class="text-center">
                                     <h6 class="mb-0"><i class="icon-dash"></i></h6>
                                     {{-- <div class="font-size-sm text-muted line-height-1">hours</div> --}}
@@ -258,7 +258,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="#" class="text-default bilgi-bankasi-tr">
+                                    <a href="#" class="text-default bilgi-bankasi-tr" id="{{ $closed->id }}">
                                         <div class="font-weight-semibold">[#{{ $closed->id }}] <?php
                                             $slen = strlen($closed->baslik);
                                             if ($slen > 75) {
@@ -366,6 +366,10 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group row">
+                                    <div class="col-lg-3"><span>Dosya Adı : </span></div>
+                                    <div class="col-lg-9" id="d_indir_div"></div>
+                                </div>
 
 
 
@@ -419,8 +423,8 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Başlığı Sahibi:</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control form-control-select2" name="selected_personel"
-                                            data-fouc>
+                                        <select class="form-control form-control-select2" name="selected_personel" data-fouc
+                                            id="yeni_selected_person">
                                             <option selected>Persoel Seç</option>
                                             @empty(!$personeller)
                                                 @foreach ($personeller as $personel)
@@ -457,10 +461,49 @@
     <!-- /Add modal -->
 
     <script>
-        $('.bilgi-bankasi-tr').on('click', function(event) {
-            $('#bilgiBankasiModal').modal('show');
+        //modal için indirme linki oluşturur
+        let div_dosya_linki = document.getElementById('d_indir_div');
+        let dosya_linki = document.createElement("a");
+        dosya_linki.className = "col-lg-3";
+        div_dosya_linki.appendChild(dosya_linki);
+        sa = "#"
+        $(document).ready(function() {
 
+            $('.bilgi-bankasi-tr').on('click', function(e) {
+                
+                e.preventDefault();
+                GetDosyaID(this.id)
+                console.log();
+                console.log(this.id)
+
+                if (sa == "#") {
+                    // dosya_linki.href = "#"
+                     dosya_linki.innerHTML="Dosya yüklenmemiş."
+                } else {
+                    dosya_linki.href = window.location.origin + "/indir/" + sa;
+                    dosya_linki.innerText = "Dosyayı indir";
+                }
+
+                $('#bilgiBankasiModal').modal('show');
+                var a = document.getElementById(this.id + "")
+                var baslik = a.childNodes[5].childNodes[1].childNodes[1].innerText;
+                var aciklama = a.childNodes[5].childNodes[1].childNodes[3].innerText;
+
+                $('#yeni_bilgi_baslik').val(baslik.substring(baslik.lastIndexOf("]") + 1, baslik.lenght))
+                $('#yeni_bilgi_aciklama').val(aciklama)
+                $('#yeni_personel_sec').val(this.id + "")
+                console.log($('#yeni_personel_sec').val());
+                document.getElementById('yeni_personel_sec').value=2;
+
+
+
+            })
         })
+
+        $('.bilgi-bankasi-tr').on('hidden.bs.modal', function(e) {
+            $(this).removeData();
+        });
+
 
         $('#yeni-bilgi-olustur-button').on('click', function(e) {
             $('#yenibilgiBankasiModal').modal('show');
@@ -489,8 +532,8 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "/bilgibankasi",
-                    data:formData,
+                    url: "/bilgibankasi/" + getProjectIdWithURL(),
+                    data: formData,
                     //fd, //$('#yeniBilgiform').serialize(),
                     processData: false, //add this
                     contentType: false, //and this
@@ -575,5 +618,31 @@
                 })
             })
         })
+
+
+        function getProjectIdWithURL() {
+            var url = window.location.href;
+            var id = url.substring(url.lastIndexOf('/') + 1);
+            return id;
+        }
+        /*
+         *Bilgi id si alır geriye bilgi tablosunda dosya id sini döndürür
+         */
+        function GetDosyaID(id) {
+
+            $.ajax({
+                type: "get",
+                url: window.location.origin + "/dosyaid/" + id,
+                async: false,
+                success: function(response) {
+                    console.log("sa" + response);
+                    sa = $.parseJSON(response);
+                },
+                error: function(response) {
+                    console.log(response)
+                }
+            })
+
+        }
     </script>
 @endsection

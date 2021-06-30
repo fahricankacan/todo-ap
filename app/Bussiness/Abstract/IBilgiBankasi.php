@@ -11,5 +11,5 @@ interface IBilgiBankasi{
     /***
      * gelen ajax post verilerini kayıt eder.
      */
-    public function AddBilgi($file,$data);
+    public function AddBilgi($request,$id);
 }

@@ -4,7 +4,9 @@ namespace App\Bussiness\Concrate;
 
 use App\Bussiness\Abstract\IBilgiBankasi;
 use App\Models\BilgiBankasi;
+use App\Models\Dosya;
 use GuzzleHttp\Psr7\Request;
+use App\Models\Personel;
 
 class BilgiBankasiManager implements IBilgiBankasi
 {
@@ -18,10 +20,10 @@ class BilgiBankasiManager implements IBilgiBankasi
         $resolved = BilgiBankasi::where('proje_id', '=', $project_id)->where('activity_id', '=', '2')->get();
         $closed = BilgiBankasi::where('proje_id', '=', $project_id)->where('activity_id', '=', '3')->get();
 
-        $bilgiRepo=[
-            'active'=>$active,
-            'resolved'=>$resolved,
-            'closed'=>$closed,
+        $bilgiRepo = [
+            'active' => $active,
+            'resolved' => $resolved,
+            'closed' => $closed,
 
         ];
 
@@ -29,18 +31,37 @@ class BilgiBankasiManager implements IBilgiBankasi
     }
 
 
-    public function UpdateToSolvedOrClosded($data,$id){
+    public function UpdateToSolvedOrClosded($data, $id)
+    {
 
-       
-        BilgiBankasi::where('id','=',$id)->update(['activity_id'=>$data["durum"]]);
+
+        BilgiBankasi::where('id', '=', $id)->update(['activity_id' => $data["durum"]]);
     }
 
 
-    public function AddBilgi($file,$data){
+    public function AddBilgi($request, $id)
+    {
+        $fileName = $request->dosya_yolu->getClientOriginalName();
+        $fileNameWithUpperFile=$request->dosya_yolu->storeAs('dosyalar', $request->dosya_yolu->getClientOriginalName());
 
-        // BilgiBankasi::Create([
-        //     ''
-        // ])
+        //dd(Personel::latest()->first());
+
+        Dosya::Create(
+            [
+                'dosya_adi' => $fileName,
+                'dosya_yolu' => storage_path("app/public/" . $fileNameWithUpperFile)
+            ]
+        );
+
+        BilgiBankasi::Create(
+            [
+                'baslik' => $request->bilgi_basligi,
+                'aciklama' => $request->bilgi_aciklama,
+                'personel_id' => $request->selected_personel,
+                'dosya_id' => Dosya::latest()->first(),
+                'proje_id' => $id
+
+            ]
+        );
     }
-
 }

@@ -54,8 +54,19 @@ Route::resource('/proje', ProjeControllerer::class);
  */
 
 
-Route::resource('/bilgibankasi', BilgiBankasiController::class);
+// Route::resource('/bilgibankasi', BilgiBankasiController::class);
 
+
+Route::get('/bilgibankasi', [BilgiBankasiController::class,'index']);
+
+Route::post('bilgibankasi/{id}',[BilgiBankasiController::class,'store']);
+Route::get('bilgibankasi/{id}',[BilgiBankasiController::class,'show']);
+
+Route::get('indir/{id}',[BilgiBankasiController::class,'downloadFile']);
+
+Route::get('dosyaid/{id}',[BilgiBankasiController::class,'GetDosyaID']);
+
+Route::patch('bilgibankasi/{id}',[BilgiBankasiController::class,'update']);
 
 
 /**

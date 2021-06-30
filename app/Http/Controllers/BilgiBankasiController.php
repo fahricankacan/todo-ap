@@ -16,10 +16,12 @@ use Carbon\Carbon;
 use App\Bussiness\Abstract\IProjeGorevDurmu;
 use App\Bussiness\Abstract\IProjeGorevleri;
 use App\Models\BilgiBankasi;
+use App\Models\Dosya;
 use App\Models\Musteri;
 use App\Models\Personel;
 use App\Models\Proje;
 use App\Models\ProjeGorevleri;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
 
 class BilgiBankasiController extends Controller
@@ -53,7 +55,6 @@ class BilgiBankasiController extends Controller
     {
 
 
-
         $this->_projeGorevDurumuService->CreateIfDefaultValuesDoesntExist();
         $projeler = Proje::all();
 
@@ -67,7 +68,6 @@ class BilgiBankasiController extends Controller
      */
     public function create(Request $request)
     {
-       
     }
 
     /**
@@ -76,17 +76,17 @@ class BilgiBankasiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
 
         // dosya_yolu
-        $request->dosya_yolu->store('app');
-        $as = $request->file();
+        // $request->dosya_yolu->storeAs('dosyalar',$request->dosya_yolu->getClientOriginalName());
+        // $as = $request->file();
 
-       
-
-       // Storage::disk('local')->put($as->path(),'Contents');
-        $SA=    $request->all();
+        $this->_bilgiBankasi->AddBilgi($request, $id);
+        return response()->json(['success' => 'Başarı ile kayıt edildi.']);
+        // Storage::disk('local')->put($as->path(),'Contents');
+        // $SA=    $request->all();
     }
 
     /**
@@ -98,8 +98,6 @@ class BilgiBankasiController extends Controller
     public function show($id)
     {
         $this->_bilgiBankasiActivty->createBilgiBankasiActivityValues();
-
-
 
         //dd(BilgiBankasi::find($id)->personel->ad);
 
@@ -146,5 +144,39 @@ class BilgiBankasiController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * indirilecek olan dosyanın idsini alır
+     */
+    public function downloadFile($id)
+    {
+
+        $dosya = Dosya::find($id);
+
+        if (!empty($dosya)) {
+            $dosya_yolu = $dosya->dosya_yolu;
+            $dilimler = explode("dosyalar/", $dosya_yolu);
+
+            return Storage::download("/dosyalar" . "/" . $dilimler[1]);
+        }
+        
+        return response('Dosya bulunamadı',404);
+    }
+
+    public function GetDosyaID($id)
+    {
+
+        $bilgi = BilgiBankasi::find($id);
+        
+        if(!empty($bilgi)){
+            $dosya = Dosya::find($bilgi->dosya_id);
+            if (!empty($dosya)) {
+                return $bilgi->dosya_id;
+            }
+        }
+       
+        return "#";
+    
     }
 }
