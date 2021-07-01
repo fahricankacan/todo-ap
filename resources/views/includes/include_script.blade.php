@@ -54,5 +54,6 @@
 
 <script src="{{ URL('global_assets/js/demo_pages/form_checkboxes_radios.js') }}"></script>
 <!-- /theme JS files -->
-
+<!--Sweet Alert cdn -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

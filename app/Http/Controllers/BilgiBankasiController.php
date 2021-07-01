@@ -129,7 +129,7 @@ class BilgiBankasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateBilgiDurumu(Request $request, $id)
     {
         $this->_bilgiBankasi->UpdateToSolvedOrClosded($request->all(), $id);
         return response()->json(['success' => 'Got Simple Ajax Request.']);
@@ -176,7 +176,21 @@ class BilgiBankasiController extends Controller
             }
         }
        
-        return "#";
+        return "";
     
+    }
+
+    public function UpdateBilgi(Request $request,$id){
+
+        $this->_bilgiBankasi->UpdateBilgi($request,$id);
+        $sa = $request->all();
+        return "update bilgi";
+    }
+
+
+    public function Delete($id){
+
+        BilgiBankasi::find($id)->delete();
+        return response()->json(['success' => 'Bilgi silindi.']);
     }
 }

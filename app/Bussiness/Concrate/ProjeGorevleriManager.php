@@ -96,4 +96,26 @@ class ProjeGorevleriManager implements IProjeGorevleri
             )
         );
     }
+
+
+    public function UpdateDurumID($request){
+        $colon=$request->colon_id;
+        $card=$request->card_id;
+        $colon_id=1;
+        if($colon=="sortable1"){
+            $colon_id=1;
+        }
+        if($colon=="sortable2"){
+            $colon_id=2;
+        }
+        if($colon=="sortable3"){
+            $colon_id=3;
+        }
+
+        ProjeGorevleri::find($card)->update(
+            [
+                'proje_durum_id' =>$colon_id
+            ]
+            );
+    }
 }

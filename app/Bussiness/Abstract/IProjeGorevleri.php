@@ -19,4 +19,9 @@ interface IProjeGorevleri
     public function Add($request, $id);
 
     public function Update($request, $id);
+
+    /**
+     * kartların kolon numarasını günceller
+     */
+    public function UpdateDurumID($request);
 }

@@ -41,10 +41,59 @@ class BilgiBankasiManager implements IBilgiBankasi
 
     public function AddBilgi($request, $id)
     {
-        $fileName = $request->dosya_yolu->getClientOriginalName();
-        $fileNameWithUpperFile=$request->dosya_yolu->storeAs('dosyalar', $request->dosya_yolu->getClientOriginalName());
+        $sonDosya=null;
+        if(!empty($request->file())){
+            $sonDosyaID=$this->DosyaEkle($request)->id;
+        }
+
+        $sonDosya = BilgiBankasi::find($id)->dosya_id;
 
         //dd(Personel::latest()->first());
+
+        BilgiBankasi::Create(
+            [
+                'baslik' => $request->bilgi_basligi,
+                'aciklama' => $request->bilgi_aciklama,
+                'personel_id' => $request->selected_personel,
+                'dosya_id' => $sonDosya,
+                'proje_id' => $id
+
+            ]
+        );
+    }
+
+
+    public function UpdateBilgi($request, $id){
+        
+     //  $dosya= $request->file();
+        $sonDosya=null;
+        if(!empty($request->file())){
+            $sonDosyaID=$this->DosyaEkle($request)->id;
+        }
+       
+        $sonDosya = BilgiBankasi::find($id)->dosya_id;
+
+        $bilgi=BilgiBankasi::where('id','=',$id)->update(
+            [
+                'baslik'=>$request->baslik,
+                'aciklama'=>$request->acilama,
+                'personel_id' =>$request->personel_sec,
+                'dosya_id' =>$sonDosya,
+            ]
+        );
+       //protected $fillable = ['id','proje_id','dosya_id','baslik','aciklama','activity_id',"personel_id"];
+
+    }
+
+
+    /**
+     * Requestten gelen dosyayı storage/dosyalar klasörüne kayıt eder 
+     * Dosyalar veri tabanına kayıt atar ve son eklenen rowu döndürür
+     */
+    private function DosyaEkle($request)
+    {
+        $fileName = $request->dosya_ekle->getClientOriginalName();
+        $fileNameWithUpperFile=$request->dosya_ekle->storeAs('dosyalar', $request->dosya_ekle->getClientOriginalName());
 
         Dosya::Create(
             [
@@ -53,15 +102,6 @@ class BilgiBankasiManager implements IBilgiBankasi
             ]
         );
 
-        BilgiBankasi::Create(
-            [
-                'baslik' => $request->bilgi_basligi,
-                'aciklama' => $request->bilgi_aciklama,
-                'personel_id' => $request->selected_personel,
-                'dosya_id' => Dosya::latest()->first(),
-                'proje_id' => $id
-
-            ]
-        );
+        return Dosya::latest()->first();
     }
 }

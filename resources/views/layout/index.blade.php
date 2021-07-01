@@ -33,7 +33,7 @@
 
 
 			<!-- Content area -->
-			<div class="content">
+			<div class="content" id="content_alani">
 
 				<!-- Main charts -->
 

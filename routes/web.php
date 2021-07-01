@@ -59,14 +59,18 @@ Route::resource('/proje', ProjeControllerer::class);
 
 Route::get('/bilgibankasi', [BilgiBankasiController::class,'index']);
 
-Route::post('bilgibankasi/{id}',[BilgiBankasiController::class,'store']);
+Route::post('/bilgiadd/{id}',[BilgiBankasiController::class,'store']);
 Route::get('bilgibankasi/{id}',[BilgiBankasiController::class,'show']);
 
 Route::get('indir/{id}',[BilgiBankasiController::class,'downloadFile']);
 
 Route::get('dosyaid/{id}',[BilgiBankasiController::class,'GetDosyaID']);
 
-Route::patch('bilgibankasi/{id}',[BilgiBankasiController::class,'update']);
+Route::patch('bilgibankasi/{id}',[BilgiBankasiController::class,'updateBilgiDurumu']);
+
+Route::post('/bilgiupdate/{id}',[BilgiBankasiController::class,'UpdateBilgi']);
+
+Route::post("/delete/{id}",[BilgiBankasiController::class,'Delete']);
 
 
 /**
@@ -85,6 +89,7 @@ Route::get('jsonplan/{id}', [PlanController::class,'GetPlanWithJson']);
 
 Route::get('/sil/{id}',[PlanController::class],'Delete');
 
+Route::post('/durumupdate',[PlanController::class,'CardDurumUpdate']);
 
 
 

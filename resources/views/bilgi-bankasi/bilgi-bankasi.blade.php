@@ -53,7 +53,7 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table text-nowrap">
+            <table class="table text-nowrap" id="bilgi_tablosu">
                 <thead>
                     <tr>
                         <th style="width: 50px">Due</th>
@@ -80,7 +80,7 @@
                         @foreach ($bilgiler['active'] as $active)
 
 
-                            <tr class="deneme-1" id="{{ $active->id }}">
+                            <tr class="deneme-1 tr_yenile" id="{{ $active->id }}">
                                 <td class="text-center">
                                     <h6 class="mb-0"><i class="icon-dash"></i></h6>
                                     {{-- <div class="font-size-sm text-muted line-height-1">hours</div> --}}
@@ -101,8 +101,8 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
-                                    <a href="#" class="text-default bilgi-bankasi-tr" id="{{ $active->id }}">
+                                <td class="bilgi-bankasi-tr" id="{{ $active->id }}">
+                                    <a href="#" class="text-default ">
                                         <div class="font-weight-semibold">[#{{ $active->id }}] <?php
                                             $slen = strlen($active->baslik);
                                             if ($slen > 75) {
@@ -135,6 +135,8 @@
                                                 <a href="#" class="dropdown-item kapatildi" id="{{ $active->id }}"><i
                                                         class="icon-cross2 text-danger"></i> Close
                                                     issue</a>
+                                                <a href="#" class="dropdown-item delete" id="{{ $active->id }}"><i
+                                                        class="icon-cross2 text-danger "></i> Delete </a>
                                             </div>
                                         </div>
                                     </div>
@@ -159,7 +161,7 @@
 
                     @empty(!$bilgiler['resolved'])
                         @foreach ($bilgiler['resolved'] as $resolved)
-                            <tr class="deneme-2" id="{{ $resolved->id }}">
+                            <tr class="deneme-2 tr_yenile" id="{{ $resolved->id }}">
                                 <td class="text-center">
                                     <h6 class="mb-0"><i class="icon-dash"></i></h6>
                                     {{-- <div class="font-size-sm text-muted line-height-1">hours</div> --}}
@@ -180,8 +182,8 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
-                                    <a href="#" class="text-default bilgi-bankasi-tr" id="{{ $resolved->id }}">
+                                <td class="bilgi-bankasi-tr" id="{{ $resolved->id }}">
+                                    <a href="#" class="text-default ">
                                         <div class="font-weight-semibold">[#{{ $resolved->id }}] <?php
                                             $slen = strlen($resolved->baslik);
                                             if ($slen > 75) {
@@ -214,6 +216,8 @@
                                                 <a href="#" class="dropdown-item kapatildi" id="{{ $resolved->id }}"><i
                                                         class="icon-cross2 text-danger"></i> Close
                                                     issue</a>
+                                                <a href="#" class="dropdown-item delete" id="{{ $resolved->id }}"><i
+                                                        class="icon-cross2 text-danger "></i> Delete </a>
                                             </div>
                                         </div>
                                     </div>
@@ -236,7 +240,7 @@
 
                     @empty(!$bilgiler['closed'])
                         @foreach ($bilgiler['closed'] as $closed)
-                            <tr class="deneme-3" id="{{ $closed->id }}">
+                            <tr class="deneme-3 tr_yenile" id="{{ $closed->id }}">
                                 <td class="text-center">
                                     <h6 class="mb-0"><i class="icon-dash"></i></h6>
                                     {{-- <div class="font-size-sm text-muted line-height-1">hours</div> --}}
@@ -257,8 +261,8 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
-                                    <a href="#" class="text-default bilgi-bankasi-tr" id="{{ $closed->id }}">
+                                <td class="bilgi-bankasi-tr" id="{{ $closed->id }}">
+                                    <a href="#" class="text-default ">
                                         <div class="font-weight-semibold">[#{{ $closed->id }}] <?php
                                             $slen = strlen($closed->baslik);
                                             if ($slen > 75) {
@@ -291,6 +295,8 @@
                                                 <a href="#" class="dropdown-item"><i class="icon-cross2 text-danger kapatildi"
                                                         id="{{ $closed->id }}"></i> Close
                                                     issue</a>
+                                                <a href="#" class="dropdown-item delete" id="{{ $closed->id }}"><i
+                                                        class="icon-cross2 text-danger "></i> Delete </a>
                                             </div>
                                         </div>
                                     </div>
@@ -304,7 +310,7 @@
     </div>
     <!-- /support tickets -->
 
-    <!--/modal -->
+    <!--/modal güncelle -->
 
     <div class="modal fade" id="bilgiBankasiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -316,7 +322,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form>
+                <form id="bilgi_form" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="modal-body">
                         <div class="card">
                             <div class="card-body">
@@ -344,7 +351,7 @@
                                     <div class="col-lg-9">
                                         <select class="form-control form-control-select2" data-fouc id="yeni_personel_sec"
                                             name="personel_sec">
-                                            <option selected>Persoel Seç</option>
+                                            <option selected value="0">Persoel Seç</option>
                                             @empty(!$personeller)
                                                 @foreach ($personeller as $personel)
                                                     <option value="{{ $personel->id }}">
@@ -401,7 +408,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="yeniBilgiform" method="GET" enctype="multipart/form-data">
+                <form id="yeniBilgiform" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="card">
@@ -438,7 +445,7 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Dosya Yükle:</label>
                                     <div class="col-lg-9">
-                                        <input type="file" class="form-input-styled" id="dosya_yolu" name="dosya_yolu">
+                                        <input type="file" class="form-input-styled" id="dosya_ekle" name="dosya_ekle">
                                         <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size
                                             2Mb</span>
                                     </div>
@@ -462,23 +469,25 @@
 
     <script>
         //modal için indirme linki oluşturur
+        var lastClickedBilgi;
         let div_dosya_linki = document.getElementById('d_indir_div');
         let dosya_linki = document.createElement("a");
         dosya_linki.className = "col-lg-3";
         div_dosya_linki.appendChild(dosya_linki);
-        sa = "#"
+        sa = ""
+        //tıklanan bilgiye göre ,bilgi formunu doldurur
         $(document).ready(function() {
-
             $('.bilgi-bankasi-tr').on('click', function(e) {
-                
-                e.preventDefault();
+
+                //e.preventDefault();
+                lastClickedBilgi = this.id;
                 GetDosyaID(this.id)
                 console.log();
                 console.log(this.id)
 
-                if (sa == "#") {
+                if (sa == "") {
                     // dosya_linki.href = "#"
-                     dosya_linki.innerHTML="Dosya yüklenmemiş."
+                    dosya_linki.innerHTML = "Dosya yüklenmemiş."
                 } else {
                     dosya_linki.href = window.location.origin + "/indir/" + sa;
                     dosya_linki.innerText = "Dosyayı indir";
@@ -493,22 +502,69 @@
                 $('#yeni_bilgi_aciklama').val(aciklama)
                 $('#yeni_personel_sec').val(this.id + "")
                 console.log($('#yeni_personel_sec').val());
-                document.getElementById('yeni_personel_sec').value=2;
+                document.getElementById('yeni_personel_sec').value = 2;
 
+            })
+        })
+
+        $(document).ready(function() {
+            $('.delete').on('click', function(e) {
+                console.log(this.id)
+
+                $.ajaxSetup({
+                    cache: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                Swal.fire({
+                    title: 'Silmek istediğine emin misin?',
+                    text: "Bunu geri alamazsın!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Evet, sil!',
+                    cancelButtonText: 'Hayır!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "POST",
+                            url: window.location.origin + "/delete/" + this.id,
+                            success: function(response) {
+                                console.log(response)
+                                Swal.fire(
+                                    'Başarı ile silindi !',
+                                    'Bir bilgi silindi !',
+                                    'success')
+                            //         $("#content_alani #bilgi_tablosu").load(window.location.href +
+                            // "  #content_alani #bilgi_tablosu")
+                            },
+                            error: function(response) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Bir hata ile karşılaşıldı!',
+
+                                })
+                            }
+                        })
+                      
+                    }
+                })
 
 
             })
         })
 
-        $('.bilgi-bankasi-tr').on('hidden.bs.modal', function(e) {
-            $(this).removeData();
-        });
 
-
+        //yeni bilgi butonuna tıklandığında bilgi ekleme modalını açar
         $('#yeni-bilgi-olustur-button').on('click', function(e) {
             $('#yenibilgiBankasiModal').modal('show');
 
         })
+        //yeni bilgi ekle 
         $(document).ready(function() {
             $('#yeniBilgiform').on('submit', function(e) {
                 e.preventDefault();
@@ -532,7 +588,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "/bilgibankasi/" + getProjectIdWithURL(),
+                    url: "/bilgiadd/" + getProjectIdWithURL(),
                     data: formData,
                     //fd, //$('#yeniBilgiform').serialize(),
                     processData: false, //add this
@@ -540,16 +596,72 @@
                     success: function(response) {
                         console.log($('#updateFormm').serialize())
                         console.log(response)
-                        $('#updateModal').modal('hide')
-                        alert("data saved");
+
+                        Swal.fire(
+                            'Bilgi Eklendi!',
+                            'Yeni bir bilgi eklendi!',
+                            'success');
+
+                        $('#yenibilgiBankasiModal').modal('hide');
+                        $("#content_alani #bilgi_tablosu").load(window.location.href +
+                            "  #content_alani #bilgi_tablosu")
                         // $("#card-body").load(window.location.href + "#card-body" )
 
                     },
                     error: function(error) {
-                        console.log(error)
-                        alert("data not saved")
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Bir hata ile karşılaşıldı!',
+
+                        })
                     }
                 })
+            })
+        })
+
+        //Bilgi güncelle 
+        $(document).ready(function() {
+            $('#bilgi_form').on('submit', function(e) {
+                e.preventDefault();
+
+                let formElement = document.getElementById('bilgi_form');
+                $.ajaxSetup({
+                    cache: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: window.location.origin + "/bilgiupdate/" + lastClickedBilgi,
+                    data: new FormData(formElement),
+                    processData: false, //add this
+                    contentType: false,
+                    success: function(response) {
+                        console.log(response)
+                        $('#bilgiBankasiModal').modal('hide');
+                        Swal.fire(
+                            'Bilgi Güncellendi!',
+                            'Sayfa yenilendiğinde değişiklikler gözükecektir!',
+                            'success'
+                        )
+                        // $("#content_alani #bilgi_tablosu .tr_yenile" ).load(window.location.href +
+                        //     "  #content_alani #bilgi_tablosu .tr_yenile" )
+                        
+                    },
+                    error: function(response) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Bir hata ile karşılaşıldı!',
+
+                        })
+                    }
+
+                })
+                console.log(this.id);
             })
         })
 
@@ -575,13 +687,23 @@
                     },
                     success: function(response) {
                         console.log(response)
-                        alert("data sended");
+
+                        Swal.fire(
+                            'Bilgi Taşındı!',
+                            'Bilgi kapanan konulara taşındı!',
+                            'success'
+                        )
                         // $("#card-body").load(window.location.href + "#card-body" )
 
                     },
                     error: function(error) {
                         console.log(error)
-                        alert("data not sended")
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Bir şeyler yanlış gitti!',
+
+                        })
                     }
                 })
             })
@@ -607,13 +729,22 @@
                     },
                     success: function(response) {
                         console.log(response)
-                        alert("data sended");
+                        Swal.fire(
+                            'Bilgi Taşındı!',
+                            'Bilgi çözülen konulara taşındı!',
+                            'success'
+                        )
+
                         //  $("#card-body").load(window.location.href + "#card-body" )
 
                     },
                     error: function(error) {
-                        console.log(error)
-                        alert("data not sended")
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Bir hata ile karşılaşıldı!',
+
+                        })
                     }
                 })
             })
@@ -639,10 +770,17 @@
                     sa = $.parseJSON(response);
                 },
                 error: function(response) {
-                    console.log(response)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Bir hata ile karşılaşıldı!',
+
+                    })
                 }
             })
 
         }
     </script>
+
+    <script src="sweetalert2.all.min.js"></script>
 @endsection

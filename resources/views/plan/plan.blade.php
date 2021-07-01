@@ -11,16 +11,16 @@
             <div class="row ">
                 <div class="col-sm-4">
                     <div class=" text-center  ">
-                        <h5> Yapılacaklar </h5>
+                        <h1 class="text-center">TO-DO</h1>
                         <hr>
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <h1 class="text-center">Yapılıyor</h1>
+                    <h1 class="text-center">IN PROGRESS</h1>
                     <hr>
                 </div>
                 <div class="col-sm-4">
-                    <h1 class="text-center">Bitti</h1>
+                    <h1 class="text-center">FINISH</h1>
                     <hr>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <div class="col-sm-4 ">
                     {{--  --}}
 
-                    <div class="card-body ">
+                    <div class="card-body " id="col1">
 
 
                         {{-- <h1 class="text-center">To-do</h1>
@@ -38,10 +38,10 @@
 
                             @empty(!$bir)
 
-                            
+
                                 @foreach ($bir as $card)
 
-                                
+
                                     <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1 .selam"
                                         id="{{ $card->id }}">
                                         <div class="card-body">
@@ -76,7 +76,7 @@
                                     </li>
 
                                 @endforeach
-                            
+
                             @endempty
                         </ul>
 
@@ -108,7 +108,7 @@
                                     <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1"
                                         id="{{ $card->id }}">
                                         <div class="card-body">
-                                            <p class="fs-3"><b>{{ $card->gorev_adi }} </b></p>
+                                            <p class="fs-3"><a class="gorev_adi_a_elementi">{{ $card->gorev_adi }} </a></p>
                                             <div class="d-flex w-100 justify-content-between">
 
                                                 <span class="text-success p-1 "> <?php echo
@@ -217,7 +217,7 @@
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form  id="updateFormm" method="post">
+                    <form id="updateFormm" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-header">
                             <h5>Görev Bilgileri</h5>
@@ -266,23 +266,13 @@
 
 
     <script src="{{ URL::asset('assets/js/plan/dropdrag.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/plan/button.js') }}">
-        < /scrip>
+    <script src="{{ URL::asset('assets/js/plan/button.js') }}"> </script>
+    <script src="sweetalert2.all.min.js"></script>
 
-        <
-        link rel = "stylesheet"
-        href = "//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" >
-            <
-            link rel = "stylesheet"
-        href = "/resources/demos/style.css" >
-
-            <
-            link href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
-        rel = "stylesheet" >
-            <
-            script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-        integrity = "sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-        crossorigin = "anonymous" >
-    </script>
+    <script link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script  link rel = "stylesheet" href = "/resources/demos/style.css" >
+    <script link href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"rel = "stylesheet" ></script >
+    <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity = "sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"   crossorigin = "anonymous" > </script>
+    
 
 @endsection

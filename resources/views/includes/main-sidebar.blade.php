@@ -91,7 +91,7 @@
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link "><i class="icon-stack"></i> <span>Bilgi Bankası</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="#" class="nav-link">Listele</a></li>
+                        <li class="nav-item"><a href="{{ URL::to('/bilgibankasi') }}" class="nav-link">Listele</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Oluştur</a></li>
                     </ul>
                 </li>

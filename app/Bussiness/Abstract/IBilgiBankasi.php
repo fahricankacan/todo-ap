@@ -12,4 +12,9 @@ interface IBilgiBankasi{
      * gelen ajax post verilerini kayıt eder.
      */
     public function AddBilgi($request,$id);
+
+    /**
+     * gelen biligiyi ve dosyayı günceller
+     */
+    public function UpdateBilgi($request, $id);
 }

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Proje;
 use Carbon\Carbon;
 use App\Models\Personel;
+use App\Models\ProjeGorevleri;
 
 class PlanController extends Controller
 {
@@ -68,8 +69,18 @@ class PlanController extends Controller
 
      public function Delete(Request $request,$id){
 
-         
+         //ProjeGorevleri::
 
          return "delete plan with id";
+     }
+
+
+     public function CardDurumUpdate(Request $request){
+
+
+        $this->_projeGorevleriService->UpdateDurumID($request);
+    
+
+        return response()->json(['success'=>'Got Simple Ajax Request.']);
      }
 }

@@ -91,16 +91,26 @@ $('li').click(async function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    var form_element = document.getElementById('updateFormm');
+    var form = new FormData(form_element);
+    console.log(form)
       $.ajax({
         
         type:"POST",
         url:"/update/"+lastCliclkedCard,
-        data: FormData, //$('#updateFormm').serialize(),
+        data: $('#updateFormm').serialize(), //,
         success:function(response){
           console.log($('#updateFormm').serialize())
           console.log(response)
           $('#updateModal').modal('hide')
-          alert("data saved");
+          Swal.fire(
+            'Kart Güncellendi!',
+            'Yeni bilgiler karta eklendi!',
+            'success'
+        )
+        // $("#col1").load(window.location.href +
+        //   "  #sortable1")
          // $("#card-body").load(window.location.href + "#card-body" )
           
         },
