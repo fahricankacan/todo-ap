@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjeGorevDurumusTable extends Migration
+class CreateSozlesmesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateProjeGorevDurumusTable extends Migration
      */
     public function up()
     {
-        Schema::create('proje_gorev_durumus', function (Blueprint $table) {
+        Schema::create('sozlesmes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('durum')->nullable();
+            $table->decimal('proje_fiyat')->default(0);
+            $table->unsignedBigInteger('proje_id')->nullable();//proje alım tarihi , kime yapılacağı(müşteri id) ,teslim tarihi gibi biligler burdan alınacak.
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateProjeGorevDurumusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proje_gorev_durumus');
+        Schema::dropIfExists('sozlesmes');
     }
 }

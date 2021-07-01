@@ -17,20 +17,20 @@ class BilgiBankasi extends Model
 
     public function proje(){
         
-        return $this->hasOne(Proje::class,'id');
+        return $this->hasOne(Proje::class,'id','proje_id');
     }
 
     public function dosya(){
         
-        return $this->hasOne(Dosya::class,'id');
+        return $this->hasOne(Dosya::class,'id','dosya_id');
     }
 
     public function activty(){
 
-        return $this->hasOne(BilgiBankasiActivity::class,'id');
+        return $this->hasOne(BilgiBankasiActivity::class,'id','activity_id');
     }
     public function personel(){
 
-        return $this->hasOne(Personel::class,'id');
+        return $this->hasOne(Personel::class,'id','personel_id');
     }
 }

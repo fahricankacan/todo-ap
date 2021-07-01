@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjeGorevDurumusTable extends Migration
+class CreateProjeDurumsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateProjeGorevDurumusTable extends Migration
      */
     public function up()
     {
-        Schema::create('proje_gorev_durumus', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('durum')->nullable();
+        Schema::create('proje_durums', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ class CreateProjeGorevDurumusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proje_gorev_durumus');
+        Schema::dropIfExists('proje_durums');
     }
 }

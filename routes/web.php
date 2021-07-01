@@ -13,6 +13,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProjeGorevleriController;
 use App\Http\Controllers\ProjePlanController;
 use App\Http\Controllers\ProjePlanlariController;
+use App\Http\Controllers\SozlesmeController;
 use App\Models\BilgiBankasi;
 use App\Models\ProjeGorevleri;
 
@@ -107,6 +108,12 @@ Route::post('/durumupdate',[PlanController::class,'CardDurumUpdate']);
 Route::resource('/personel',PersonelController::class);
 
 
+
+/**
+ * Sözleşme 
+ */
+
+ Route::resource('/sozlesme', SozlesmeController::class);
 
 
 

@@ -33,9 +33,12 @@ class ProjeControllerer extends Controller
     public function index()
     {
 
-        $projeler = $this->_projeService->GetProjectWithMusteriName();
 
-        return view('proje.proje')->with('projeler', $projeler);
+       // dd(Proje::find(1)->musteri->ad);
+        $projeler = $this->_projeService->GetProjectWithMusteriName();
+        
+
+        return view('proje.proje')->with('projeler', $projeler)->with('musteriler',Musteri::all());
     }
 
     /**
@@ -73,8 +76,9 @@ class ProjeControllerer extends Controller
      */
     public function show($id)
     {
-
-        return view('proje.show');
+        $proje = Proje::find($id);
+        
+        return $proje->toJson();
     }
 
     /**
@@ -104,7 +108,7 @@ class ProjeControllerer extends Controller
 
         $this->_projeService->Update($request, $id);
 
-        return redirect('/proje');
+        return  "update form";//redirect('/proje');
     }
 
     /**

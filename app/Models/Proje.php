@@ -15,10 +15,14 @@ class Proje extends Model
 
     protected $fillable = ['id','proje_adi',
     'alim_tarihi','teslim_tarihi','proje_aciklamasi',
-    'aktif_pasif','musteri_id'];
+    'aktif_pasif','musteri_id']; //sozlesme_id eklenecek
 
     public function musteri(){
-        return $this->belongsTo(Musteri::class);
+        return $this->hasOne(Musteri::class,'id','musteri_id');//1. key ==id , 2. key == foregin key
+    }
+
+    public function sozlesmes(){
+        return $this->hasOne(Sozlesme::class,'id','sozlesme_id');
     }
 
 }

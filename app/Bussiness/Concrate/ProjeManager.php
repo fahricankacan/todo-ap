@@ -40,14 +40,19 @@ class ProjeManager implements IProjeService
 
     public function Update($proje, $id)
     {
+
+        $musteriID=null;
+        if($proje->edit_musteri_adi!="default"){
+
+            $musteriID=$proje->edit_musteri_adi;
+        }
+
         $proje = Proje::where('id', $id)->update(
             array(
-                'proje_adi' => $proje->proje_adi,
-                'proje_aciklamasi' => $proje->proje_aciklamasi,
-                'alim_tarihi' => $proje->baslangic_tarihi,
-                'teslim_tarihi' => $proje->bitis_tarihi,
-                'musteri_id' => $proje->musteri_id,
-                'aktif_pasif' => $proje->aktif_pasif,
+                'proje_adi' => $proje->edit_proje_adi,
+                'proje_aciklamasi' => $proje->edit_proje_aciklamasi,             
+                'teslim_tarihi' => $proje->edit_proje_teslim_tarihi,
+                'musteri_id' => $musteriID,          
             )
         );
 
@@ -128,10 +133,12 @@ class ProjeManager implements IProjeService
         // TODO:JOİN İŞLEMİ İLE YAP RELETİONSHİP İLE UĞRAŞMA 
         //$result = Proje::find(1)->musteri;
 
-        $result = DB::table('projes')
-            ->join('musteris', 'projes.musteri_id', '=', 'musteris.id')
-            //->orderBy('projes.id','asc')
-            ->get();
+        // $result = DB::table('projes')
+        //     ->join('musteris', 'projes.musteri_id', '=', 'musteris.id')
+        //     //->orderBy('projes.id','asc')
+        //     ->get();
+        
+        $result= Proje::all();
 
         return $result;
     }
