@@ -14,7 +14,8 @@ class CreateProjeDurumsTable extends Migration
     public function up()
     {
         Schema::create('proje_durums', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('durum');
             $table->timestamps();
         });
     }

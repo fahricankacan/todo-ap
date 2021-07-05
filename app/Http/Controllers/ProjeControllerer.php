@@ -6,8 +6,11 @@ use App\Bussiness\Abstract\IMusteriService;
 use App\Bussiness\Abstract\IProjeService;
 use App\Bussiness\Deneme;
 use App\Bussiness\IDeneme;
+use App\Http\Requests\ProjeControllerRequest;
+use App\Http\Requests\ProjeControllerStoreRequest;
 use App\Models\Musteri;
 use App\Models\Proje;
+use App\Models\Sozlesme;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Echo_;
 
@@ -34,11 +37,11 @@ class ProjeControllerer extends Controller
     {
 
 
-       // dd(Proje::find(1)->musteri->ad);
+        // dd(Proje::find(1)->musteri->ad);
         $projeler = $this->_projeService->GetProjectWithMusteriName();
-        
 
-        return view('proje.proje')->with('projeler', $projeler)->with('musteriler',Musteri::all());
+
+        return view('proje.proje')->with('projeler', $projeler)->with('musteriler', Musteri::all());
     }
 
     /**
@@ -58,11 +61,20 @@ class ProjeControllerer extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProjeControllerStoreRequest $request)
     {
+        // $validate = $request->validate(
+        //     [
+        //         'proje_adi' => 'required',
+        //         'proje_aciklamasi' => 'required',
+        //         'baslangic_tarihi' => 'required',
+        //         'teslim_tarihi' => 'required',
+        //         'musteri_id' => 'required',
+        //         'proje_fiyat'=> 'required|regex:/^\d+(\.\d{1,2})?$/'
+        //     ]
+        // );
 
-
-
+        $validated = $request->validated();
         $sa = $this->_projeService->Add($request);
 
         return redirect('/proje');
@@ -77,7 +89,7 @@ class ProjeControllerer extends Controller
     public function show($id)
     {
         $proje = Proje::find($id);
-        
+
         return $proje->toJson();
     }
 
@@ -91,7 +103,7 @@ class ProjeControllerer extends Controller
     {
         $proje = $this->_projeService->GetProjectWithMusteriNameById($id); //Proje::find($id);
         //dd($proje);
-       // print_r($proje[0]->proje_adi);
+        // print_r($proje[0]->proje_adi);
         return view('proje.edit')->with('proje', $proje[0]);
         //->with('musteri',Musteri::find($proje->musteri_id));
     }
@@ -108,7 +120,7 @@ class ProjeControllerer extends Controller
 
         $this->_projeService->Update($request, $id);
 
-        return  "update form";//redirect('/proje');
+        return  "update form"; //redirect('/proje');
     }
 
     /**
@@ -119,12 +131,14 @@ class ProjeControllerer extends Controller
      */
     public function destroy($id)
     {
-        Proje::find($id)->destroy();
-        return redirect('/musteri');
+        Proje::destroy($id);
+        Sozlesme::where('proje_id','=',$id)->delete();
+        return "Proje silindi";
     }
 
 
-    public function planIndex(){
+    public function planIndex()
+    {
 
         return view('proje.plan');
     }

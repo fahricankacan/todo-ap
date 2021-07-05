@@ -47,6 +47,19 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(\App\Bussiness\Abstract\IBilgiBankasi::class,function(){
             return new \App\Bussiness\Concrate\BilgiBankasiManager();
         });
+        $this->app->singleton(\App\Bussiness\Abstract\IProjeDurumu::class,function(){
+            return new \App\Bussiness\Concrate\ProjeDurumuManager();
+        });
+        $this->app->singleton(\App\Bussiness\Abstract\ISozlesmeService::class,function(){
+            return new \App\Bussiness\Concrate\SozlesmeManager();
+        });
+       
+
+       
+
+
+
+        
 
     }
 

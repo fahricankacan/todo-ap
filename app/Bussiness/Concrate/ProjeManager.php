@@ -5,6 +5,7 @@ namespace App\Bussiness\Concrate;
 use App\Bussiness\Abstract\IProjeService;
 use App\Models\Musteri;
 use App\Models\Proje;
+use App\Models\Sozlesme;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -22,6 +23,7 @@ class ProjeManager implements IProjeService
     public function Add($request)
     {
 
+        
         $result = Proje::create(
             array(
                 'proje_adi' => $request->proje_adi,
@@ -33,6 +35,16 @@ class ProjeManager implements IProjeService
             )
         );
 
+
+        // $projeId = Proje::latest()->first()->id;
+
+        // $request = Sozlesme::Create(
+        //     [
+        //         'proje_fiyat' => $request->proje_fiyat,
+        //         'proje_id' => $projeId
+        //     ]
+        // );
+
         return array(
             'Succes' => "Proje eklendi."
         );
@@ -41,18 +53,18 @@ class ProjeManager implements IProjeService
     public function Update($proje, $id)
     {
 
-        $musteriID=null;
-        if($proje->edit_musteri_adi!="default"){
+        $musteriID = null;
+        if ($proje->edit_musteri_adi != "default") {
 
-            $musteriID=$proje->edit_musteri_adi;
+            $musteriID = $proje->edit_musteri_adi;
         }
 
         $proje = Proje::where('id', $id)->update(
             array(
                 'proje_adi' => $proje->edit_proje_adi,
-                'proje_aciklamasi' => $proje->edit_proje_aciklamasi,             
+                'proje_aciklamasi' => $proje->edit_proje_aciklamasi,
                 'teslim_tarihi' => $proje->edit_proje_teslim_tarihi,
-                'musteri_id' => $musteriID,          
+                'musteri_id' => $musteriID,
             )
         );
 
@@ -137,8 +149,8 @@ class ProjeManager implements IProjeService
         //     ->join('musteris', 'projes.musteri_id', '=', 'musteris.id')
         //     //->orderBy('projes.id','asc')
         //     ->get();
-        
-        $result= Proje::all();
+
+        $result = Proje::all();
 
         return $result;
     }

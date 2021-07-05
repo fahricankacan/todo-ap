@@ -16,6 +16,9 @@ class CreateSozlesmesTable extends Migration
         Schema::create('sozlesmes', function (Blueprint $table) {
             $table->increments('id');
             $table->decimal('proje_fiyat')->default(0);
+            $table->timestamp('alim_tarihi')->nullable();
+            $table->timestamp('teslim_tarihi')->nullable();
+            $table->string('aciklama_metni')->nullable();
             $table->unsignedBigInteger('proje_id')->nullable();//proje alım tarihi , kime yapılacağı(müşteri id) ,teslim tarihi gibi biligler burdan alınacak.
             $table->timestamps();
         });

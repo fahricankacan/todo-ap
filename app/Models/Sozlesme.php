@@ -15,6 +15,10 @@ class Sozlesme extends Model
 
     protected $fillable = [
         'id', 'proje_fiyat',
-        'proje_id'
+        'proje_id','alim_tarihi','teslim_tarihi','aciklama_metni'
     ];
+
+    public function proje(){
+        return $this->hasOne(Proje::class,'id','proje_id');
+    }
 }
