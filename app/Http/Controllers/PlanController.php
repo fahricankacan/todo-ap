@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Bussiness\Abstract\IProjeGorevDurmu;
 use App\Bussiness\Abstract\IProjeGorevleri;
+use App\Http\Requests\PlanCreateRequest;
 use Illuminate\Http\Request;
 use App\Models\Proje;
 use Carbon\Carbon;
@@ -44,7 +45,7 @@ class PlanController extends Controller
         return view('plan.projeler')->with('projeler', $projeler);
     }
 
-    public function CreateNewCard(Request $request,$projeId){
+    public function CreateNewCard(PlanCreateRequest $request,$projeId){
 
         
         $this->_projeGorevleriService->Add($request, $projeId);

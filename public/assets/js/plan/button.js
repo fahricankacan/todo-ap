@@ -148,32 +148,68 @@ $(document).ready(function(){
     e.preventDefault();
     console.log('ben sil buton')
 
-    $.ajaxSetup({
-      cache:false,
-      headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-  });
 
-
-    $.ajax({
-      
-      type:"POST",
-      url:window.location.origin +"/sil/"+lastCliclkedCard,
-      success:function(response){   
-        console.log(response)
-        $('#updateModal').modal('hide')
-        Swal.fire(
-          'Kart Silindi!',
-          'Kart başarı ile silindi!',
-          'success'
-        )
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
       },
-      error:function(error){
-        console.log(error)
-        alert("data not saved")
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Silmek istediğinden emin misin?',
+      text: "Bu işlemi geri alamazsın!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Evet, sil!',
+      cancelButtonText: 'Hayır, iptal!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        $.ajaxSetup({
+          cache:false,
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+    
+    
+        $.ajax({
+          
+          type:"POST",
+          url:window.location.origin +"/sil/"+lastCliclkedCard,
+          success:function(response){   
+            // console.log(response)
+            $('#updateModal').modal('hide')
+            swalWithBootstrapButtons.fire(
+              'Silindi!',
+              'Görev kartı silindi.',
+              'success'
+            )
+          },
+          error:function(error){
+            swalWithBootstrapButtons.fire(
+              'Opps',
+              'Hata ile karşılaşıldı.',
+              'error'
+            )
+          }
+      })
+       
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'İptal edildi',
+          'Görev Kartı güvende :)',
+          'error'
+        )
       }
-  })
+    })
+  
 })
 })
 

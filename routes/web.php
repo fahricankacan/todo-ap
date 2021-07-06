@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BilgiBankasiController;
 use App\Http\Controllers\denemecontroller;
 use App\Http\Controllers\musteri;
@@ -32,7 +33,7 @@ use App\Models\ProjeGorevleri;
 
 //*MusteriCcontroller
 
-Route::resource('/', DashboardController::class);
+
 
 /*
 Route::get('/', function () {
@@ -108,7 +109,11 @@ Route::post('/durumupdate',[PlanController::class,'CardDurumUpdate']);
 
 Route::resource('/personel',PersonelController::class);
 
-
+Route::get('auth/login',[AuthController::class,'Login'])->name('auth.login');
+Route::get('auth/register',[AuthController::class,'Register'])->name('auth.register');
+Route::post('auth/save',[AuthController::class,'Save'])->name('auth.save');
+Route::post('auth/check',[AuthController::class,'Check'])->name('auth.check');
+Route::post('auth/logout',[AuthController::class,'Logout'])->name('auth.logout');
 
 /**
  * Sözleşme 

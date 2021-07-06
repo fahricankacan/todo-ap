@@ -87,6 +87,16 @@
                                     class="fa fa-plus-circle mx-1"></i>Ekle</button>
                         </div>
 
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     </div>
                 </div>
                 <!--------------/COLON 1 ------------------------->
@@ -105,38 +115,38 @@
 
 
 
-                                <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1 .selam"
-                                id="{{ $card->id }}">
-                                <div class="card-body">
-                                    <p class="fs-3"><b>{{ $card->gorev_adi }} </b></p>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        @empty(!$card->teslim_tarihi)
-                                            <?php $day =
-                                            Carbon\Carbon::parse($card->alim_tarihi)->diffInDays($card->teslim_tarihi); ?>
-                                            <span class="<?php if ($day > 0) {
-                                                            echo 'text-success';
-                                                        } else {
-                                                            echo 'text-danger';
-                                                        } ?> p-1 "> <?php echo $day; ?> Gün </span>
-                                            <!--gün sayısına göre renk değişecek. -->
-                                        @endempty
+                                    <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1 .selam"
+                                        id="{{ $card->id }}">
+                                        <div class="card-body">
+                                            <p class="fs-3"><b>{{ $card->gorev_adi }} </b></p>
+                                            <div class="d-flex w-100 justify-content-between">
+                                                @empty(!$card->teslim_tarihi)
+                                                    <?php $day =
+                                                    Carbon\Carbon::parse($card->alim_tarihi)->diffInDays($card->teslim_tarihi); ?>
+                                                    <span class="<?php if ($day > 0) {
+                                                                    echo 'text-success';
+                                                                } else {
+                                                                    echo 'text-danger';
+                                                                } ?> p-1 "> <?php echo $day; ?> Gün </span>
+                                                    <!--gün sayısına göre renk değişecek. -->
+                                                @endempty
 
 
-                                        @empty(!App\Models\Personel::find($card->personel_id))
-                                            <span class="bg-blue-800 rounded-circle  p-1">
+                                                @empty(!App\Models\Personel::find($card->personel_id))
+                                                    <span class="bg-blue-800 rounded-circle  p-1">
 
-                                                <?php
-                                                $personel = App\Models\Personel::find($card->personel_id);
-                                                $name = $personel->ad . ' ' . $personel->soyad;
-                                                $first = substr($personel->ad, 0, 1);
-                                                $second = substr($personel->soyad, 0, 1);
-                                                $firstSecond = $first . '.' . $second;
-                                                ?>
-                                                <i title="{{ $name }}">{{ $firstSecond }}</i>
-                                            @endempty
-                                    </div>
-                                </div>
-                            </li>
+                                                        <?php
+                                                        $personel = App\Models\Personel::find($card->personel_id);
+                                                        $name = $personel->ad . ' ' . $personel->soyad;
+                                                        $first = substr($personel->ad, 0, 1);
+                                                        $second = substr($personel->soyad, 0, 1);
+                                                        $firstSecond = $first . '.' . $second;
+                                                        ?>
+                                                        <i title="{{ $name }}">{{ $firstSecond }}</i>
+                                                    @endempty
+                                            </div>
+                                        </div>
+                                    </li>
                                 @endforeach
                             @endempty
                         </ul>
@@ -151,39 +161,39 @@
                             @empty(!$uc)
                                 @foreach ($uc as $card)
 
-                                
-                                <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1 .selam"
-                                id="{{ $card->id }}">
-                                <div class="card-body">
-                                    <p class="fs-3"><b>{{ $card->gorev_adi }} </b></p>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        @empty(!$card->teslim_tarihi)
-                                            <?php $day =
-                                            Carbon\Carbon::parse($card->alim_tarihi)->diffInDays($card->teslim_tarihi); ?>
-                                            <span class="<?php if ($day > 0) {
-                                                            echo 'text-success';
-                                                        } else {
-                                                            echo 'text-danger';
-                                                        } ?> p-1 "> <?php echo $day; ?> Gün </span>
-                                            <!--gün sayısına göre renk değişecek. -->
-                                        @endempty
+
+                                    <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1 .selam"
+                                        id="{{ $card->id }}">
+                                        <div class="card-body">
+                                            <p class="fs-3"><b>{{ $card->gorev_adi }} </b></p>
+                                            <div class="d-flex w-100 justify-content-between">
+                                                @empty(!$card->teslim_tarihi)
+                                                    <?php $day =
+                                                    Carbon\Carbon::parse($card->alim_tarihi)->diffInDays($card->teslim_tarihi); ?>
+                                                    <span class="<?php if ($day > 0) {
+                                                                    echo 'text-success';
+                                                                } else {
+                                                                    echo 'text-danger';
+                                                                } ?> p-1 "> <?php echo $day; ?> Gün </span>
+                                                    <!--gün sayısına göre renk değişecek. -->
+                                                @endempty
 
 
-                                        @empty(!App\Models\Personel::find($card->personel_id))
-                                            <span class="bg-blue-800 rounded-circle  p-1">
+                                                @empty(!App\Models\Personel::find($card->personel_id))
+                                                    <span class="bg-blue-800 rounded-circle  p-1">
 
-                                                <?php
-                                                $personel = App\Models\Personel::find($card->personel_id);
-                                                $name = $personel->ad . ' ' . $personel->soyad;
-                                                $first = substr($personel->ad, 0, 1);
-                                                $second = substr($personel->soyad, 0, 1);
-                                                $firstSecond = $first . '.' . $second;
-                                                ?>
-                                                <i title="{{ $name }}">{{ $firstSecond }}</i>
-                                            @endempty
-                                    </div>
-                                </div>
-                            </li>
+                                                        <?php
+                                                        $personel = App\Models\Personel::find($card->personel_id);
+                                                        $name = $personel->ad . ' ' . $personel->soyad;
+                                                        $first = substr($personel->ad, 0, 1);
+                                                        $second = substr($personel->soyad, 0, 1);
+                                                        $firstSecond = $first . '.' . $second;
+                                                        ?>
+                                                        <i title="{{ $name }}">{{ $firstSecond }}</i>
+                                                    @endempty
+                                            </div>
+                                        </div>
+                                    </li>
 
                                 @endforeach
                             @endempty
@@ -241,8 +251,14 @@
                                 </select>
                             </div>
 
+
+
                             <button type="submit" class="btn btn-primary">Onayla</button>
-                  
+
+                        </div>
+
+                        <div class="modal-footer">
+                          
                         </div>
 
                     </form>
@@ -308,9 +324,15 @@
     <script src="sweetalert2.all.min.js"></script>
 
     <script link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script  link rel = "stylesheet" href = "/resources/demos/style.css" >
-    <script link href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"rel = "stylesheet" ></script >
-    <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity = "sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"   crossorigin = "anonymous" > </script>
-    
+        < script link rel = "stylesheet"
+        href = "/resources/demos/style.css" >
+           
+        < script link href ="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+        rel = "stylesheet" >  </>
+         < script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity = "sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin = "anonymous" >
+    </script>
+
 
 @endsection
