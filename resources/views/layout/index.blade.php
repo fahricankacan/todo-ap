@@ -27,7 +27,7 @@
 		<div class="content-wrapper">
 
 			<!-- Page header -->
-			@include('includes.page-header')
+			{{-- @include('includes.page-header') --}}
 
 			<!-- /page header -->
 

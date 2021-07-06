@@ -22,7 +22,7 @@
 					</a>
 				</li>
 
-				<li class="nav-item dropdown">
+				{{-- <li class="nav-item dropdown">
 					<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
 						<i class="icon-git-compare"></i>
 						<span class="d-md-none ml-2">Git updates</span>
@@ -102,19 +102,19 @@
 							</div>
 						</div>
 					</div>
-				</li>
+				</li> --}}
 			</ul>
 
 			<span class="badge bg-success ml-md-3 mr-md-auto">Online</span>
 
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown">
-					<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
-						<i class="icon-people"></i>
+					<a href="{{ route('auth.logout') }}" class="navbar-nav-link  caret-0" >
+						<i class="icon-exit"></i>
 						<span class="d-md-none ml-2">Users</span>
 					</a>
 					
-					<div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-300">
+					{{-- <div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-300">
 						<div class="dropdown-content-header">
 							<span class="font-weight-semibold">Users online</span>
 							<a href="#" class="text-default"><i class="icon-search4 font-size-base"></i></a>
@@ -183,10 +183,10 @@
 							<a href="#" class="text-grey mr-auto">All users</a>
 							<a href="#" class="text-grey"><i class="icon-gear"></i></a>
 						</div>
-					</div>
+					</div> --}}
 				</li>
 
-				<li class="nav-item dropdown">
+				{{-- <li class="nav-item dropdown">
 					<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
 						<i class="icon-bubbles4"></i>
 						<span class="d-md-none ml-2">Messages</span>
@@ -289,9 +289,9 @@
 							<a href="#" class="bg-light text-grey w-100 py-2" data-popup="tooltip" title="Load more"><i class="icon-menu7 d-block top-0"></i></a>
 						</div>
 					</div>
-				</li>
+				</li> --}}
 
-				<li class="nav-item dropdown dropdown-user">
+				{{-- <li class="nav-item dropdown dropdown-user">
 					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
 						<img src="../../../../global_assets/images/placeholders/placeholder.jpg" class="rounded-circle mr-2" height="34" alt="">
 						<span>Victoria</span>
@@ -305,7 +305,7 @@
 						<a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a>
 						<a href="#" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
 					</div>
-				</li>
+				</li> --}}
 			</ul>
 		</div>
 	</div>

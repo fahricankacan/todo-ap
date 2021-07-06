@@ -53,10 +53,14 @@
         <a href="{{ route('auth.register') }}">Kayıt olmak için tıklayın.</a>
     </div>
     <div class="content d-flex justify-content-center align-items-center">
+    @if(!empty(Session::get('fail')))
+        
+  
      <div class="alert alert-danger ">
          {{ Session::get('fail') }}
      </div>
+     @endif
     </div>
-
+    
 
 @endsection
