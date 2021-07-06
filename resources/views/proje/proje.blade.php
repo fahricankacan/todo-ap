@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <table class="table table-lg invoice-archive">
+        <table class="table table-lg invoice-archive ">
             <thead>
                 <tr>
                     <th>#</th>
@@ -314,6 +314,7 @@
                     $('#edit_musteri_adi').val(ajaxData["musteri_id"]);
                     $('#edit_proje_teslim_tarihi').val(jsonDate.toISOString().split('T')[0]);
                     $('#edit_proje_aciklamasi').val(ajaxData["proje_aciklamasi"]);
+                    $('#')
                 },
                 error: function(response) {
                     console.log(response)

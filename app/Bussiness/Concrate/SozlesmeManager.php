@@ -58,8 +58,8 @@ class SozlesmeManager implements ISozlesmeService
             'musteri_soyad' =>$musteri[0]->soyad, 
             'musteri_il'=>$musteri[0]->il,
             'musteri_tel'=>$musteri[0]->tel_no,
-            'musteri_ilce'=>$musteri[0]->ilce
-            
+            'musteri_ilce'=>$musteri[0]->ilce,
+            'musteri_mail_adresi'=>$musteri[0]->mail_adresi
         ];
 
         return $sozlesmeData;

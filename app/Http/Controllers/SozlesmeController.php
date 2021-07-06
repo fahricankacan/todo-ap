@@ -69,7 +69,7 @@ class SozlesmeController extends Controller
     public function show($id)
     {
         $result = $this->_sozlesmeService->GetSozlesmeShowScreenDatas($id);
-        return $result;
+        return json_encode($result);
     }
 
     /**
@@ -92,7 +92,9 @@ class SozlesmeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->_sozlesmeService->Update($request, $id);
+
+        return response()->json(['success' => 'Başarı ile güncellendi']);
     }
 
     /**

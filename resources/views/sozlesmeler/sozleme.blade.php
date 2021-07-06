@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <table class="table table-lg invoice-archive">
+        <table class="table table-lg invoice-archive" div="sozlesme_table">
             <thead>
                 <tr>
                     <th>#</th>
@@ -141,7 +141,7 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-2">Proje Seç</label>
                                     <div class="col-lg-10">
-                                        <select class="form-control" name="proje_id">
+                                        <select class="form-control" name="proje_id" id="edit_proje_id">
                                             <option value="default">Default select box</option>
                                             @foreach ($projeler as $proje)
                                                 <option value="{{ $proje->id }}">{{ $proje->proje_adi }}</option>
@@ -153,7 +153,7 @@
                                     <label class="col-form-label col-lg-2">Sözleşme Metni</label>
                                     <div class="col-lg-10">
                                         <textarea rows="3" cols="3" class="form-control" placeholder="Sözleşme Metni Ekle"
-                                            name="sozlesme_metni"></textarea>
+                                            name="sozlesme_metni" id="edit_sozlesme_metni"></textarea>
                                     </div>
                                 </div>
 
@@ -165,14 +165,16 @@
                                                 <div class="form-group">
                                                     <label> Alım Tarihi</label>
                                                     <input class="form-control form-control-lg" type="date"
-                                                        placeholder="Başlangıç Tarihi" name="sozlesme_tarihi">
+                                                        placeholder="Başlangıç Tarihi" name="sozlesme_tarihi"
+                                                        id="edit_alim_tarihi">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label> Teslim Tarihi</label>
                                                     <input class="form-control form-control-lg" type="date"
-                                                        placeholder="Teslim Tarihi" name="teslim_tarihi">
+                                                        placeholder="Teslim Tarihi" name="teslim_tarihi"
+                                                        id="edit_teslim_tarihi">
                                                 </div>
                                             </div>
                                         </div>
@@ -183,7 +185,7 @@
                                     <label class="col-form-label col-lg-2">Fiyat</label>
                                     <div class="col-lg-10">
                                         <input type="text" class="form-control" name="proje_fiyat"
-                                            placeholder="Proje fiyatı">
+                                            placeholder="Proje fiyatı" id="edit_proje_fiyat">
                                     </div>
                                 </div>
 
@@ -251,10 +253,14 @@
                                 <div class="col-sm-6">
                                     <div class="mb-4">
                                         <div class="text-sm-right">
-                                            <h4 class="text-primary mb-2 mt-md-2" id="proje_adi_ve_id">Invoice #49029</h4>
+                                            <h4 class="text-primary mb-2 mt-md-2" id="proje_adi_ve_id">Proje No #49029</h4>
                                             <ul class="list list-unstyled mb-0">
-                                                <li>Date: <span class="font-weight-semibold" id="alim_tarihi">January 12, 2015</span></li>
-                                                <li>Due date: <span class="font-weight-semibold"id="teslim_tarihi">May 12, 2015</span></li>
+                                                <li>Sözleşme Tarihi: <span class="font-weight-semibold"
+                                                        id="alim_tarihi">January 12,
+                                                        2015</span></li>
+                                                <li>Teslim Tarihi: <span class="font-weight-semibold" id="teslim_tarihi">May
+                                                        12,
+                                                        2015</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -263,7 +269,7 @@
 
                             <div class="d-md-flex flex-md-wrap">
                                 <div class="mb-4 mb-md-2">
-                                    <span class="text-muted">Invoice To:</span>
+                                    <span class="text-muted">Müşteri:</span>
                                     <ul class="list list-unstyled mb-0">
                                         <li>
                                             <h5 class="my-2" id="musteri_Adi">Rebecca Manes</h5>
@@ -271,7 +277,7 @@
                                         {{-- <li><span class="font-weight-semibold" id>Normand axis LTD</span></li> --}}
                                         {{-- <li id="">3 Goodman Street</li> --}}
                                         <li id="musteri_ilce">London E1 8BF</li>
-                                        <li id="museri_il">United Kingdom</li>
+                                        <li id="musteri_il">United Kingdom</li>
                                         <li id="musteri_tel">888-555-2311</li>
                                         <li id="mail_adresi"><a href="#">rebecca@normandaxis.ltd</a></li>
                                     </ul>
@@ -322,14 +328,15 @@
                                     <tr>
                                         <td>
                                             <h6 class="mb-0">Sözleşme Metni</h6>
-                                            <span class="text-muted" id="aciklama_metni">One morning, when Gregor Samsa woke from
+                                            <span class="text-muted" id="aciklama_metni">One morning, when Gregor Samsa woke
+                                                from
                                                 troubled.</span>
-                                        {{-- </td>
+                                            {{-- </td>
                                         <td>$70</td>
                                         <td>57</td>
                                         <td><span class="font-weight-semibold">$3,990</span></td> --}}
                                     </tr>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -376,13 +383,14 @@
                                     {{-- <div class="text-right mt-3">
                                         <button type="button" class="btn btn-primary btn-labeled btn-labeled-left"><b><i
                                                     class="icon-paperplane"></i></b> Send invoice</button>
-                                    </div> --}}
+                                     </div> --}}
                                 </div>
                             </div>
                         </div>
 
                         <div class="card-footer">
-                            <span class="text-muted">Taraflar işbu Sözleşmeyi imzalamakla doğrudan ya da dolaylı olarak diğer Tarafın gizli
+                            <span class="text-muted">Taraflar işbu Sözleşmeyi imzalamakla doğrudan ya da dolaylı olarak
+                                diğer Tarafın gizli
                                 bilgilerini öğrenecek durumdaki tüm personeli, danışmanları, alt yüklenicileri, iş ortakları
                                 ve olası diğer kişilerin gizli bilgiyi koruyacaklarını ve bu Sözleşme’nin şartlarına
                                 uyacaklarını taahhüt etmektedir. Taraflar bu amacı sağlamaya yönelik olarak ilgili kişiler
@@ -393,8 +401,9 @@
 
                 </div>
 
-                <div class="modal-footer">                
-                    <button type="button" class="btn btn-light btn-sm ml-3"><i class="icon-printer mr-2"></i> Yazdır</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light btn-sm ml-3"><i class="icon-printer mr-2"></i>
+                        Yazdır</button>
                 </div>
 
             </div>
@@ -404,16 +413,54 @@
 
 
     <script>
-        //sozlesme düzenle
+        var duzenleID;
+        //sozlesme düzenle içerisi doldurulması
         $(document).ready(function() {
             $('.duzenle_sec').on('click', function(e) {
                 e.preventDefault();
-                console.log(this.id)
+                duzenleID = this.id;
                 SozlesmeDuzenleModalDoldur(this.id)
                 $('#sozlesme_edit_modal').modal('toggle');
 
             })
         })
+
+
+        //sozlesme düzenle submit edilirse
+        $(document).ready(function() {
+            $('#sozlesme_duzenle').on('submit', function(e) {
+                e.preventDefault();
+
+                $.ajaxSetup({
+                    cache: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "PUT",
+                    url: window.location.origin + "/sozlesme/" + duzenleID,
+                    data:$('#sozlesme_duzenle').serialize(),
+                    success: function(response) {
+                        $('#sozlesme_edit_modal').modal('toggle');
+                        Swal.fire(
+                            'Başarılı !',
+                            'Bir kayıt güncellendi !',
+                            'success')
+                            //$('#sozlesme_table').load('')
+                    },
+                    error: function(response) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Bir hata ile karşılaşıldı!',
+                        })
+                    }
+                })
+            })
+        })
+
         //sozlesme sil
         $(document).ready(function() {
             $('.duzenle_sil').on('click', function(e) {
@@ -425,23 +472,43 @@
 
         //sözleşme incele
         $(document).ready(function() {
-            $('.incele').on('click',async function(e) {
+            $('.incele').on('click', async function(e) {
                 e.preventDefault();
                 $('#sozlesme_inceleme_modal').modal('toggle');
-              await  SozlesmeIncele(this.id);
+                await SozlesmeIncele(this.id);
             })
         })
 
 
-        function SozlesmeIncele(id){
+        function SozlesmeIncele(id) {
             console.log(id)
 
             $.ajax({
-                type:"GET",
-                url:window.location.origin + "/sozlesme/" + id,
+                type: "GET",
+                url: window.location.origin + "/sozlesme/" + id,
                 async: false,
-                success: function(response) {console.log(response)},
-                error:function(response){console.log(response)}
+                success: function(response) {
+                    console.log(response)
+                    ajaxData = JSON.parse(response);
+                    alimTarihi = new Date(ajaxData["sozlesme_alim_tarihi"])
+                    teslimTarihi = new Date(ajaxData["sozlesme_teslim_tarihi"])
+                    document.getElementById('proje_baslik').innerText = ajaxData['proje_adi'];
+                    document.getElementById('proje_adi_ve_id').innerText = "#Proje No:" + ajaxData['proje_id'];
+                    document.getElementById('proje_ucreti').innerText = "₺" + ajaxData['proje_ucreti'];
+                    document.getElementById('alim_tarihi').innerText = alimTarihi;
+                    document.getElementById('teslim_tarihi').innerText = teslimTarihi;
+                    document.getElementById('aciklama_metni').innerText = ajaxData['sozlesme_aciklama_metni'];
+                    document.getElementById('musteri_Adi').innerText = ajaxData['musteri_adi'] + " " + ajaxData[
+                        'musteri_soyad'];
+                    document.getElementById('musteri_il').innerText = ajaxData['musteri_il']
+                    document.getElementById('musteri_ilce').innerText = ajaxData['musteri_ilce']
+                    document.getElementById('musteri_tel').innerText = ajaxData['musteri_tel']
+                    document.getElementById('mail_adresi').innerText = ajaxData['musteri_mail_adresi']
+
+                },
+                error: function(response) {
+                    console.log(response)
+                }
             })
         }
 
@@ -481,12 +548,15 @@
                 async: false,
                 success: function(response) {
                     console.log(response);
+
                     ajaxData = JSON.parse(response);
-                    // jsonDate = new Date(ajaxData["teslim_tarihi"])
-                    // $('#edit_proje_adi').val(ajaxData["proje_adi"]);
-                    // $('#edit_musteri_adi').val(ajaxData["musteri_id"]);
-                    // $('#edit_proje_teslim_tarihi').val(jsonDate.toISOString().split('T')[0]);
-                    // $('#edit_proje_aciklamasi').val(ajaxData["proje_aciklamasi"]);
+                    t_tarih = new Date(ajaxData["teslim_tarihi"])
+                    a_tarihi = new Date(ajaxData["alim_tarihi"])
+                    document.getElementById('edit_proje_id').value = ajaxData['proje_id']
+                    document.getElementById('edit_sozlesme_metni').innerText = ajaxData['aciklama_metni']
+                    document.getElementById('edit_alim_tarihi').valueAsDate = a_tarihi
+                    document.getElementById('edit_teslim_tarihi').valueAsDate = t_tarih
+                    document.getElementById('edit_proje_fiyat').value = ajaxData['proje_fiyat']
                 },
                 error: function(response) {
                     console.log(response)
