@@ -19,14 +19,14 @@ class ProjeGorevDurumuManager implements IProjeGorevDurmu
 
         if ($count != 3) {
             $projeGorevleri = ProjeGorevDurumu::Create(
-                ['durumu' => 'todo']
+                ['durum' => 'todo']
             );
 
             ProjeGorevDurumu::Create(
-                ['durumu' => 'inprogress']
+                ['durum' => 'inprogress']
             );
             ProjeGorevDurumu::Create(
-                ['durumu' => 'done']
+                ['durum' => 'done']
             );
         }
     }

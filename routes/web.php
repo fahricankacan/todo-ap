@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PersonelController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\ProjeDurumController;
 use App\Http\Controllers\ProjeGorevleriController;
 use App\Http\Controllers\ProjePlanController;
 use App\Http\Controllers\ProjePlanlariController;
@@ -117,3 +118,8 @@ Route::resource('/personel',PersonelController::class);
 
 
 
+ /**
+  * Proje durum controller
+  */
+
+  Route::resource('/projedurum', ProjeDurumController::class);

@@ -5,7 +5,7 @@
 
     <div class="card">
         <div class="card-header bg-transparent header-elements-inline">
-            <h6 class="card-title">Projeler</h6>
+            <h6 class="card-title">Sözleşmeler</h6>
             <div class="header-elements">
                 {{-- <div class="list-icons">
             <a class="list-icons-item" data-action="collapse"></a>
@@ -33,8 +33,8 @@
 
                     @if ($sozlesme->proje_id > 0)
 
-                        <tr id="{{ $sozlesme->proje->id }}">
-                            <td>#{{ $sozlesme->proje->id }}</td>
+                        <tr id="{{ $sozlesme->id }}">
+                            <td>#{{ $sozlesme->id }}</td>
                             <td>{{ $sozlesme->proje->proje_adi }}</td>
                             <td>
                                 <h6 class="mb-0">
@@ -49,14 +49,15 @@
                                 </h6>
                             </td>
                             <td>
-                                <select name="status" class="form-control form-control-select2"
-                                    data-placeholder="Select status">
-                                    <option value="overdue">Yapım Aşamasında</option>
-                                    <option value="hold" selected>Beklemede</option>
-                                    <option value="pending">Bitti</option>
-                                    <option value="paid">Ödemenmiş</option>
-                                    {{-- <option value="invalid">Invalid</option> --}}
-                                    <option value="cancel">İptal Edilmiş</option>
+                                <select name="status" class="form-control form-control-select2 proje_durum_secenekleri"
+                                    data-placeholder="Select status " id="{{ $sozlesme->id}}" value={{ $sozlesme->proje->proje_durum_id }} >
+                                   
+                                    <option value="1" {{ $sozlesme->proje->proje_durum_id ==1 ? 'selected' :'' }}>Yapım Aşamasında</option>
+                                    <option value="2" {{ $sozlesme->proje->proje_durum_id ==2 ? 'selected' :'' }} >Beklemede</option>
+                                    <option value="3" {{ $sozlesme->proje->proje_durum_id ==3 ? 'selected' :'' }}>Bitti</option>
+                                    <option value="4" {{ $sozlesme->proje->proje_durum_id ==4 ? 'selected' :'' }}>Ücreti Ödemenmiş</option>
+                                    <option value="5" {{ $sozlesme->proje->proje_durum_id ==5 ? 'selected' :'' }}>Ücreti Ödenmemiş</option>
+                                    <option value="6" {{ $sozlesme->proje->proje_durum_id ==6 ? 'selected' :'' }}>İptal Edilmiş</option>
                                 </select>
                             </td>
                             <td>
@@ -566,5 +567,9 @@
             var today = new Date().toISOString().split('T')[0];
 
         }
+
+      
     </script>
+
+    <script src="{{ URL::asset('assets/js/proje_durum.js') }}"></script>
 @endsection

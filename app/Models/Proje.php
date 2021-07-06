@@ -15,7 +15,7 @@ class Proje extends Model
 
     protected $fillable = ['id','proje_adi',
     'alim_tarihi','teslim_tarihi','proje_aciklamasi',
-    'aktif_pasif','musteri_id']; //sozlesme_id eklenecek
+    'aktif_pasif','musteri_id','proje_durum_id']; //sozlesme_id eklenecek
 
     public function musteri(){
         return $this->hasOne(Musteri::class,'id','musteri_id');//1. key ==id , 2. key == foregin key

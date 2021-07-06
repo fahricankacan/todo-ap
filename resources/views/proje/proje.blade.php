@@ -24,7 +24,7 @@
                     <th>Statü</th>
                     <th>Sözleşme Tarihi</th>
                     <th>Teslim Tarihi</th>
-                    <th>Fiyat</th>
+                    {{-- <th>Fiyat</th> --}}
                     <th class="text-center">Seçenekler</th>
                 </tr>
             </thead>
@@ -48,14 +48,14 @@
                             </h6>
                         </td>
                         <td>
-                            <select name="status" class="form-control form-control-select2"
-                                data-placeholder="Select status">
-                                <option value="overdue">Yapım Aşamasında</option>
-                                <option value="hold" selected>Beklemede</option>
-                                <option value="pending">Bitti</option>
-                                <option value="paid">Ödemenmiş</option>
-                                {{-- <option value="invalid">Invalid</option> --}}
-                                <option value="cancel">İptal Edilmiş</option>
+                            <select name="status" class="form-control form-control-select2 proje_durum_secenekleri" data-placeholder="Select status"
+                                id="{{ $proje->id }}">
+                                    <option value="1" {{ $proje->proje_durum_id ==1 ? 'selected' :'' }}>Yapım Aşamasında</option>
+                                    <option value="2" {{ $proje->proje_durum_id ==2 ? 'selected' :'' }} >Beklemede</option>
+                                    <option value="3" {{ $proje->proje_durum_id ==3 ? 'selected' :'' }}>Bitti</option>
+                                    <option value="4" {{ $proje->proje_durum_id ==4 ? 'selected' :'' }}>Ücreti Ödemenmiş</option>
+                                    <option value="5" {{ $proje->proje_durum_id ==5 ? 'selected' :'' }}>Ücreti Ödenmemiş</option>
+                                    <option value="6" {{ $proje->proje_durum_id ==6 ? 'selected' :'' }}>İptal Edilmiş</option>
                             </select>
                         </td>
                         <td>
@@ -64,17 +64,17 @@
                         <td>
                             <span class="badge badge-success">{{ $proje->teslim_tarihi }}</span>
                         </td>
-                        <td>
-                            <h6 class="mb-0 font-weight-bold">₺17,890
-                                {{-- @if (!empty($proje->sozlesme))
+                        {{-- <td>
+                            <h6 class="mb-0 font-weight-bold">₺{{17,890}}
+                                 @if (!empty($proje->sozlesme))
                         {{ ₺$proje->sozlesme->proje_fiyat }}
                     @else
                         {{ "-" }}
-                    @endif($proje->sozlesmes) --}}
+                    @endif($proje->sozlesmes) 
 
-                                <!--<span class="d-block font-size-sm text-muted font-weight-normal">VAT $4,890</span>-->
+                                <span class="d-block font-size-sm text-muted font-weight-normal">VAT $4,890</span>
                             </h6>
-                        </td>
+                        </td> --}}
                         <td class="text-center secenekler" id="{{ $proje->id }}">
                             <div class="list-icons list-icons-extended">
                                 <a href="#" id="{{ $proje->id }}" class="list-icons-item secenekler incele"
@@ -189,7 +189,7 @@
                 <form id="proje_edit_modal_form" method="GET" enctype="multipart/form-data">
                     @csrf
                     <div class="card">
-                    
+
                         <div class="card-body">
                             <form action="#">
                                 <div class="form-group">
@@ -223,7 +223,7 @@
                                         name="incele_proje_aciklamasi" id="incele_proje_aciklamasi" disabled></textarea>
                                 </div>
 
-                              
+
                             </form>
                         </div>
                     </div>
@@ -395,4 +395,6 @@
         })
     </script>
 
+
+    <script src="{{ URL::asset('assets/js/proje_durum.js') }}"></script>
 @endsection

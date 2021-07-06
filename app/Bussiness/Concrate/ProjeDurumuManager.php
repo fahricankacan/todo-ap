@@ -3,7 +3,9 @@
 namespace App\Bussiness\Concrate;
 
 use App\Bussiness\Abstract\IProjeDurumu;
+use App\Models\Proje;
 use App\Models\ProjeDurum;
+use App\Models\Sozlesme;
 
 class ProjeDurumuManager implements IProjeDurumu{
 
@@ -12,7 +14,7 @@ class ProjeDurumuManager implements IProjeDurumu{
         
         $count = ProjeDurum::count();
 
-        if ($count != 5) {
+        if ($count < 5) {
              ProjeDurum::Create(
                 ['durum' => 'yapım_aşamasında']
             );
@@ -33,6 +35,24 @@ class ProjeDurumuManager implements IProjeDurumu{
                 ['durum' => 'iptal']
             );
         }
+    }
+
+    public function Update($request, $id){
+
+        if(($request->sayfa=="proje")){
+            $projeID = $id;
+            $projeDurumID=$request->p_durum;
+        }else{
+            $proje = Sozlesme::find($id);
+            $projeID = $proje->proje_id;
+            $projeDurumID=$request->durum;
+        }
+        
+        //$projeDurumID =Proje::find($projeID)->proje_durum_id;
+        Proje::where('id', '=', $projeID)
+        ->update([
+            'proje_durum_id'=>$request->durum
+        ]);
     }
 
 }
