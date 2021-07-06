@@ -69,9 +69,9 @@ class PlanController extends Controller
 
      public function Delete(Request $request,$id){
 
-         //ProjeGorevleri::
+         ProjeGorevleri::destroy($id);
 
-         return "delete plan with id";
+         return response()->json(['success'=>'Başarı ile kart silindi.']);
      }
 
 

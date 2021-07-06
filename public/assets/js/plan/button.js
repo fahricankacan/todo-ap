@@ -122,6 +122,7 @@ $('li').click(async function(){
     })
   })
  
+  
 
 
 
@@ -140,6 +141,42 @@ $('li').click(async function(){
        console.error(error);
    }
 }
+
+
+$(document).ready(function(){
+  $('#btn_gorev_sil').on('click',function(e){
+    e.preventDefault();
+    console.log('ben sil buton')
+
+    $.ajaxSetup({
+      cache:false,
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
+
+    $.ajax({
+      
+      type:"POST",
+      url:window.location.origin +"/sil/"+lastCliclkedCard,
+      success:function(response){   
+        console.log(response)
+        $('#updateModal').modal('hide')
+        Swal.fire(
+          'Kart Silindi!',
+          'Kart başarı ile silindi!',
+          'success'
+        )
+      },
+      error:function(error){
+        console.log(error)
+        alert("data not saved")
+      }
+  })
+})
+})
+
 
 /*************
  * todo : promise metodla gelen değeri bekle , 

@@ -88,7 +88,7 @@ Route::post('/update/{id}',[PlanController::class,'UpdateCard']);
 
 Route::get('jsonplan/{id}', [PlanController::class,'GetPlanWithJson']);
 
-Route::get('/sil/{id}',[PlanController::class],'Delete');
+Route::post('sil/{id}',[PlanController::class,'Delete']);
 
 Route::post('/durumupdate',[PlanController::class,'CardDurumUpdate']);
 

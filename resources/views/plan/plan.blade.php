@@ -242,6 +242,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary">Onayla</button>
+                  
                         </div>
 
                     </form>
@@ -290,7 +291,8 @@
                                 </select>
                             </div>
 
-                            <button type"submit" class="btn btn-primary">Onayla</button>
+                            <button type="submit" class="btn btn-primary">Onayla</button>
+                            <button type="button" class="btn btn-danger " id="btn_gorev_sil">Sil </button>
                     </form>
                 </div>
 
