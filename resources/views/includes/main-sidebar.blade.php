@@ -59,16 +59,17 @@
                         </span>
                     </a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="{{ route('musteri.index') }}" class="nav-link">Listele</a></li>
-                        <li class="nav-item"><a href="{{ route('musteri.create') }}" class="nav-link">Oluştur</a></li>
+                        <li class="nav-item"><a href="{{ route('musteri.index') }}" class="nav-link active">Listele</a></li>
+                        <li class="nav-item"><a href="{{ route('musteri.create') }}" class="nav-link active">Oluştur</a></li>
                     </ul>
                 </li>
-                <li class="nav-item ">
+                <li class="nav-item nav-item-submenu ">
                     <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Sözleşmeler</span></a>
 
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="{{ route('musteri.index') }}" class="nav-link">Listele</a></li>
-                        <li class="nav-item"><a href="{{ route('musteri.create') }}" class="nav-link">Oluştur</a></li>
+                        <li class="nav-item"><a href="{{ route('sozlesme.index') }}" class="nav-link active">Listele</a></li>
+                        <li class="nav-item"><a href="{{ route('sozlesme.create') }}" class="nav-link active">Oluştur</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item nav-item-submenu">
@@ -78,21 +79,21 @@
                         </li>
                         <li class="nav-item"><a href="{{ route('proje.create') }}" class="nav-link active">
                                 Oluştur</a></li>
-                        
+
                         <li class="nav-item"><a href="{{ URL::to('/projeler') }}" class="nav-link active">
                                 Proje Planlaması</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link active">
-                                Proje Görev Dağılımı</a></li>
+
 
 
                     </ul>
 
                 </li>
                 <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link "><i class="icon-stack"></i> <span>Bilgi Bankası</span></a>
+                    <a href="#" class="nav-link "><i class="icon-color-sampler"></i> <span>Bilgi Bankası</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="{{ URL::to('/bilgibankasi') }}" class="nav-link">Listele</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Oluştur</a></li>
+                        <li class="nav-item"><a href="{{ URL::to('/bilgibankasi') }}" class="nav-link active">Listele</a>
+                        </li>
+                        {{-- <li class="nav-item"><a href="#" class="nav-link">Oluştur</a></li> --}}
                     </ul>
                 </li>
                 <li class="nav-item nav-item-submenu">

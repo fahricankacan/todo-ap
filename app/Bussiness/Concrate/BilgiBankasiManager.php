@@ -41,13 +41,19 @@ class BilgiBankasiManager implements IBilgiBankasi
 
     public function AddBilgi($request, $id)
     {
-        $sonDosya=null;
+        $sonDosyaID=null;
         if(!empty($request->file())){
             $sonDosyaID=$this->DosyaEkle($request)->id;
         }
 
-        $sonDosya = BilgiBankasi::find($id)->dosya_id;
+        $bilgiBankasiCount= BilgiBankasi::count();
 
+        if($bilgiBankasiCount>0){
+
+            $sonDosyaID = BilgiBankasi::find($id)->dosya_id;
+        }
+
+        
         //dd(Personel::latest()->first());
 
         BilgiBankasi::Create(
@@ -55,7 +61,7 @@ class BilgiBankasiManager implements IBilgiBankasi
                 'baslik' => $request->bilgi_basligi,
                 'aciklama' => $request->bilgi_aciklama,
                 'personel_id' => $request->selected_personel,
-                'dosya_id' => $sonDosya,
+                'dosya_id' => $sonDosyaID,
                 'proje_id' => $id
 
             ]

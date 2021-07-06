@@ -448,7 +448,7 @@
                             'Başarılı !',
                             'Bir kayıt güncellendi !',
                             'success')
-                            //$('#sozlesme_table').load('')
+                            //$('#content').load(window.location.origin + "/sozlesme/ #content")
                     },
                     error: function(response) {
                         Swal.fire({

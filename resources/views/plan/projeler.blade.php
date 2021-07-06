@@ -9,7 +9,7 @@
 
         @foreach ($projeler as $proje)
             <div class="col">
-                <div class="card" id="{{ $proje->id }}">
+                <div class="card proje_carti" id="{{ $proje->id }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $proje->proje_adi }}</h5>
                         <p class="card-text text-truncate">{{ $proje->proje_aciklamasi }}</p>
@@ -36,7 +36,7 @@
 
 
     <script>
-        $('.card').click(function() {
+        $('.proje_carti').click(function() {
             let baseUrl = "<?php echo url('/'); ?>";
             window.location.href = baseUrl + "/plan/" + this.id;
         });

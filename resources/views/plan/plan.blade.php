@@ -105,21 +105,38 @@
 
 
 
-                                    <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1"
-                                        id="{{ $card->id }}">
-                                        <div class="card-body">
-                                            <p class="fs-3"><a class="gorev_adi_a_elementi">{{ $card->gorev_adi }} </a></p>
-                                            <div class="d-flex w-100 justify-content-between">
+                                <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1 .selam"
+                                id="{{ $card->id }}">
+                                <div class="card-body">
+                                    <p class="fs-3"><b>{{ $card->gorev_adi }} </b></p>
+                                    <div class="d-flex w-100 justify-content-between">
+                                        @empty(!$card->teslim_tarihi)
+                                            <?php $day =
+                                            Carbon\Carbon::parse($card->alim_tarihi)->diffInDays($card->teslim_tarihi); ?>
+                                            <span class="<?php if ($day > 0) {
+                                                            echo 'text-success';
+                                                        } else {
+                                                            echo 'text-danger';
+                                                        } ?> p-1 "> <?php echo $day; ?> Gün </span>
+                                            <!--gün sayısına göre renk değişecek. -->
+                                        @endempty
 
-                                                <span class="text-success p-1 "> <?php echo
-                                                    Carbon\Carbon::parse($card->alim_tarihi)->diffInDays($card->teslim_tarihi);
-                                                    ?> </span>
-                                                <!--gün sayısına göre renk değişecek. -->
-                                                <span class="bg-blue-800 rounded-circle  p-1"> <i
-                                                        title="Bünyamin Görken">B.G</i></>
-                                            </div>
-                                        </div>
-                                    </li>
+
+                                        @empty(!App\Models\Personel::find($card->personel_id))
+                                            <span class="bg-blue-800 rounded-circle  p-1">
+
+                                                <?php
+                                                $personel = App\Models\Personel::find($card->personel_id);
+                                                $name = $personel->ad . ' ' . $personel->soyad;
+                                                $first = substr($personel->ad, 0, 1);
+                                                $second = substr($personel->soyad, 0, 1);
+                                                $firstSecond = $first . '.' . $second;
+                                                ?>
+                                                <i title="{{ $name }}">{{ $firstSecond }}</i>
+                                            @endempty
+                                    </div>
+                                </div>
+                            </li>
                                 @endforeach
                             @endempty
                         </ul>
@@ -134,20 +151,39 @@
                             @empty(!$uc)
                                 @foreach ($uc as $card)
 
-                                    <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1"
-                                        id="{{ $card->id }}">
-                                        <div class="card-body">
-                                            <p class="fs-3"><b>{{ $card->gorev_adi }} </b></p>
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <span class="text-success p-1 "> <?php echo
-                                                    Carbon\Carbon::parse($card->alim_tarihi)->diffInDays($card->teslim_tarihi);
-                                                    ?></span>
-                                                <!--gün sayısına göre renk değişecek. -->
-                                                <span class="bg-blue-800 rounded-circle  p-1"> <i
-                                                        title="Bünyamin Görken">B.G</i></>
-                                            </div>
-                                        </div>
-                                    </li>
+                                
+                                <li class="shadow-sm list-group-item list-group-item-action list-group-item-secondary my-1 .selam"
+                                id="{{ $card->id }}">
+                                <div class="card-body">
+                                    <p class="fs-3"><b>{{ $card->gorev_adi }} </b></p>
+                                    <div class="d-flex w-100 justify-content-between">
+                                        @empty(!$card->teslim_tarihi)
+                                            <?php $day =
+                                            Carbon\Carbon::parse($card->alim_tarihi)->diffInDays($card->teslim_tarihi); ?>
+                                            <span class="<?php if ($day > 0) {
+                                                            echo 'text-success';
+                                                        } else {
+                                                            echo 'text-danger';
+                                                        } ?> p-1 "> <?php echo $day; ?> Gün </span>
+                                            <!--gün sayısına göre renk değişecek. -->
+                                        @endempty
+
+
+                                        @empty(!App\Models\Personel::find($card->personel_id))
+                                            <span class="bg-blue-800 rounded-circle  p-1">
+
+                                                <?php
+                                                $personel = App\Models\Personel::find($card->personel_id);
+                                                $name = $personel->ad . ' ' . $personel->soyad;
+                                                $first = substr($personel->ad, 0, 1);
+                                                $second = substr($personel->soyad, 0, 1);
+                                                $firstSecond = $first . '.' . $second;
+                                                ?>
+                                                <i title="{{ $name }}">{{ $firstSecond }}</i>
+                                            @endempty
+                                    </div>
+                                </div>
+                            </li>
 
                                 @endforeach
                             @endempty

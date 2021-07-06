@@ -28,16 +28,16 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="#" class="dropdown-item"><i class="icon-file-pdf"></i> Export to .pdf</a>
+                            {{-- <a href="#" class="dropdown-item"><i class="icon-file-pdf"></i> Export to .pdf</a>
                             <a href="#" class="dropdown-item"><i class="icon-file-excel"></i> Export to .csv</a>
-                            <a href="#" class="dropdown-item"><i class="icon-file-word"></i> Export to .doc</a>
+                            <a href="#" class="dropdown-item"><i class="icon-file-word"></i> Export to .doc</a> --}}
                             <a href="./personel/{{ $personel->id }}/edit" class="dropdown-item"><i class="icon-pencil"></i> Düzenle</a>
                             <form action="/personel/{{ $personel->id }}" method="POST">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="dropdown-item"><i class="icon-trash"></i> Sil</button>
                             </form>
-                            <a href="./personel/{{ $personel->id }}" class="dropdown-item"><i class="icon-search4"></i> İncele</a>
+                            {{-- <a href="./personel/{{ $personel->id }}" class="dropdown-item"><i class="icon-search4"></i> İncele</a> --}}
 
                         </div>
                     </div>
