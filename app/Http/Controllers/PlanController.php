@@ -49,7 +49,7 @@ class PlanController extends Controller
 
         
         $this->_projeGorevleriService->Add($request, $projeId);
-        return back()->withInput();
+        return "yeni kart eklendi"; // back()->withInput();
     }
 
      public function UpdateCard(Request $request,$id){

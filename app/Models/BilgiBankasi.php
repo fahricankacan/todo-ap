@@ -13,7 +13,7 @@ class BilgiBankasi extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['id','proje_id','dosya_id','baslik','aciklama','activity_id',"personel_id"];
+    protected $fillable = ['id','proje_id','dosya_id','baslik','aciklama','activity_id',"personel_id","created_at","updated_at"];
 
     public function proje(){
         

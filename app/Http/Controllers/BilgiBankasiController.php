@@ -54,7 +54,8 @@ class BilgiBankasiController extends Controller
     public function index()
     {
 
-
+        
+        
         $this->_projeGorevDurumuService->CreateIfDefaultValuesDoesntExist();
         $projeler = Proje::all();
 
@@ -97,6 +98,9 @@ class BilgiBankasiController extends Controller
      */
     public function show($id)
     {
+
+        
+       
         $this->_bilgiBankasiActivty->createBilgiBankasiActivityValues();
 
         //dd(BilgiBankasi::find($id)->personel->ad);
@@ -108,7 +112,13 @@ class BilgiBankasiController extends Controller
         return  view('bilgi-bankasi.bilgi-bankasi', [
             'bilgiler' => $this->_bilgiBankasi->GetBilgilerByProjectID($id)
 
-        ])->with('personeller', Personel::all());
+        ])->with('personeller', Personel::all())
+        ->with('total_tickets',$this->_bilgiBankasi->TotalTicket($id))
+        ->with('resolved_tickets',$this->_bilgiBankasi->TotalResolvedTickets($id))
+        ->with('closed_tickets',$this->_bilgiBankasi->TotalClosedTickets($id))
+        ->with('all_ticket_count',$this->_bilgiBankasi->AllTicketCount())
+        ->with('response_time',$this->_bilgiBankasi->TotalREsponseTime($id))
+        ->with('active_tickets',$this->_bilgiBankasi->TotalActiveTickets($id));
     }
 
     /**

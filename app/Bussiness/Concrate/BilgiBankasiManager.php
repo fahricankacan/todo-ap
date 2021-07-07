@@ -110,4 +110,43 @@ class BilgiBankasiManager implements IBilgiBankasi
 
         return Dosya::latest()->first();
     }
+
+    public function TotalTicket($id){
+      $totalTicket=BilgiBankasi::where('proje_id', '=', $id)->count();
+      return $totalTicket;
+    }
+    public function TotalResolvedTickets($id){
+        $totalResolvedTickets =BilgiBankasi::where('activity_id','=',2)->count();
+        return $totalResolvedTickets;
+        
+    }
+    public function TotalClosedTickets($id){
+        $TotalClosedTickets=BilgiBankasi::where('activity_id','=',3)->count();
+        return $TotalClosedTickets;
+
+    }
+    public function TotalActiveTickets($id){
+        $totalActiveTickets = BilgiBankasi::where('activity_id','=',1)->count();
+        return $totalActiveTickets;
+    }
+    public function TotalREsponseTime($id){
+        $firstBilgi = BilgiBankasi::where('activity_id', '=',1)->first();
+        $sonBilgi = BilgiBankasi::where('activity_id', '=',3)->get()->last();
+
+        $firstTime = $firstBilgi->created_at;
+        $LasttTime = $firstBilgi->updated_at;
+
+        $diff = $firstTime->diffInSeconds($LasttTime);
+        $totalDuration=gmdate('H:i:s', $diff);
+
+        return $totalDuration;
+
+    }
+
+    public function AllTicketCount(){
+        $count = BilgiBankasi::count();
+
+        return $count;
+    }
+
 }

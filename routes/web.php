@@ -105,7 +105,7 @@ Route::get('/plan/{id}',[PlanController::class,'index'])->name('plan.index');
 
 Route::get('/projeler',[PlanController::class,'a']);
 
-Route::post('/kartolustur/{id}',[PlanController::class,'CreateNewCard']);
+Route::get('/kartolustur/{id}',[PlanController::class,'CreateNewCard']);
 
 Route::post('/update/{id}',[PlanController::class,'UpdateCard']);
 

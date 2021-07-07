@@ -3,26 +3,25 @@
 @section('content')
 
     <!-- Support tickets -->
-    <div class="card">
+    <div class="card" id="bilgi_Bank_cart_id">
         <div class="card-header header-elements-sm-inline">
-            <h6 class="card-title">Support tickets</h6>
-            <div class="header-elements">
+            <h6 class="card-title">Bilgi tickets</h6>
+            {{-- <div class="header-elements">
                 <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                     <i class="icon-calendar3 mr-2"></i>
                     <span></span>
                 </a>
-            </div>
+            </div> --}}
         </div>
 
-        <div class="card-body d-md-flex align-items-md-center justify-content-md-between flex-md-wrap">
+        <div class="card-body d-md-flex align-items-md-center justify-content-md-between flex-md-wrap" id="bilgi_Bank_cart_body_id">
             <div class="d-flex align-items-center mb-3 mb-md-0">
                 <div id="tickets-status"></div>
                 <div class="ml-3">
-                    <h5 class="font-weight-semibold mb-0">14,327 <span
+                    <h5 class="font-weight-semibold mb-0">{{ $all_ticket_count}}  <span
                             class="text-success font-size-sm font-weight-normal"><i class="icon-arrow-up12"></i>
                             (+2.9%)</span></h5>
-                    <span class="badge badge-mark border-success mr-1"></span> <span class="text-muted">Jun 16, 10:00
-                        am</span>
+                    <span class="badge badge-mark border-success mr-1"></span> <span class="text-muted">{{ Carbon\Carbon::now() }}</span>
                 </div>
             </div>
 
@@ -31,8 +30,8 @@
                     <i class="icon-alarm-add"></i>
                 </a>
                 <div class="ml-3">
-                    <h5 class="font-weight-semibold mb-0">1,132</h5>
-                    <span class="text-muted">total tickets</span>
+                    <h5 class="font-weight-semibold mb-0">{{ $total_tickets }}</h5>
+                    <span class="text-muted">toplam tickets</span>
                 </div>
             </div>
 
@@ -41,8 +40,8 @@
                     <i class="icon-spinner11"></i>
                 </a>
                 <div class="ml-3">
-                    <h5 class="font-weight-semibold mb-0">06:25:00</h5>
-                    <span class="text-muted">response time</span>
+                    <h5 class="font-weight-semibold mb-0">{{ $response_time }}</h5>
+                    <span class="text-muted">cevap süresi</span>
                 </div>
             </div>
 
@@ -53,7 +52,7 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table text-nowrap" id="bilgi_tablosu">
+            <table class="table text-nowrap" id="bilgi_tablosu_tablo_id">
                 <thead>
                     <tr>
                         <th style="width: 50px">Due</th>
@@ -93,7 +92,7 @@
                                             </a>
                                         </div>
                                         <div>
-                                            <a href="#"
+                                            <a href="#" data-target="yenibilgiBankasiModal"
                                                 class="text-default font-weight-semibold letter-icon-title">@empty(!$active->personel){{ $active->personel->ad }}
                                                 @endempty</a>
                                             <div class="text-muted font-size-sm"><span
@@ -477,9 +476,9 @@
         sa = ""
         //tıklanan bilgiye göre ,bilgi formunu doldurur
         $(document).ready(function() {
-            $('.bilgi-bankasi-tr').on('click', function(e) {
+            $(document).on('click','.bilgi-bankasi-tr' ,function(e) {
 
-                //e.preventDefault();
+                
                 lastClickedBilgi = this.id;
                 GetDosyaID(this.id)
                 console.log();
@@ -508,7 +507,7 @@
         })
 
         $(document).ready(function() {
-            $('.delete').on('click', function(e) {
+            $(document).on('click','.delete' ,function(e) {
                 console.log(this.id)
 
                 $.ajaxSetup({
@@ -538,8 +537,11 @@
                                     'Başarı ile silindi !',
                                     'Bir bilgi silindi !',
                                     'success')
-                            //         $("#content_alani #bilgi_tablosu").load(window.location.href +
-                            // "  #content_alani #bilgi_tablosu")
+                                    $("#bilgi_Bank_cart_body_id ").load(window.location.href +
+                            "  #bilgi_Bank_cart_body_id ")
+                            
+                            $("#bilgi_tablosu_tablo_id ").load(window.location.href +
+                            "  #bilgi_tablosu_tablo_id")
                             },
                             error: function(response) {
                                 Swal.fire({
@@ -603,8 +605,9 @@
                             'success');
 
                         $('#yenibilgiBankasiModal').modal('hide');
-                        $("#content_alani #bilgi_tablosu").load(window.location.href +
-                            "  #content_alani #bilgi_tablosu")
+                        $("#bilgi_tablosu_tablo_id ").load(window.location.href +
+                            "  #bilgi_tablosu_tablo_id")
+                            // window.location.reload();
                         // $("#card-body").load(window.location.href + "#card-body" )
 
                     },
@@ -647,8 +650,8 @@
                             'Sayfa yenilendiğinde değişiklikler gözükecektir!',
                             'success'
                         )
-                        // $("#content_alani #bilgi_tablosu .tr_yenile" ).load(window.location.href +
-                        //     "  #content_alani #bilgi_tablosu .tr_yenile" )
+                        $("#bilgi_tablosu_tablo_id ").load(window.location.href +
+                            "  #bilgi_tablosu_tablo_id")
                         
                     },
                     error: function(response) {
@@ -693,7 +696,8 @@
                             'Bilgi kapanan konulara taşındı!',
                             'success'
                         )
-                        // $("#card-body").load(window.location.href + "#card-body" )
+                        $("#bilgi_tablosu_tablo_id ").load(window.location.href +
+                            "  #bilgi_tablosu_tablo_id")
 
                     },
                     error: function(error) {
@@ -735,7 +739,8 @@
                             'success'
                         )
 
-                        //  $("#card-body").load(window.location.href + "#card-body" )
+                        $("#bilgi_tablosu_tablo_id ").load(window.location.href +
+                            "  #bilgi_tablosu_tablo_id")
 
                     },
                     error: function(error) {

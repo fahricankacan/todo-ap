@@ -24,7 +24,7 @@
                     <hr>
                 </div>
             </div>
-            <div class=row>
+            <div class=row id="plan_görev_row_idsi">
                 <!--------------COLON 1 ------------------------->
                 <div class="col-sm-4 ">
                     {{--  --}}
@@ -83,19 +83,19 @@
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-1">
 
-                            <button onclick="myFunction()" class="btn btn-outline-secondary " type="button" id="eklebtn"><i
+                            <button class="btn btn-outline-secondary " type="button" id="eklebtn"><i
                                     class="fa fa-plus-circle mx-1"></i>Ekle</button>
                         </div>
 
                         @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
                     </div>
                 </div>
@@ -214,8 +214,10 @@
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="/kartolustur/{{ $id }}" method="POST">
+                    <form method="get" id="kart_olustur">
                         @csrf
+
+
                         <div class="modal-header">
                             <h5>Görev Bilgileri</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -258,7 +260,7 @@
                         </div>
 
                         <div class="modal-footer">
-                          
+
                         </div>
 
                     </form>
@@ -318,21 +320,20 @@
 
 
 
-
+    {{-- <script src="sweetalert2.all.min.js"></script> --}}
     <script src="{{ URL::asset('assets/js/plan/dropdrag.js') }}"></script>
     <script src="{{ URL::asset('assets/js/plan/button.js') }}"> </script>
-    <script src="sweetalert2.all.min.js"></script>
 
-    <script link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        < script link rel = "stylesheet"
-        href = "/resources/demos/style.css" >
-           
-        < script link href ="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
-        rel = "stylesheet" >  </>
-         < script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+
+    <script link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> </script>
+        <script link rel = "stylesheet" href = "/resources/demos/style.css" >    </script>
+       
+    <script link href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel = "stylesheet" > </script>
+       
+            <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity = "sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin = "anonymous" >
-    </script>
+   </script>
 
 
 @endsection

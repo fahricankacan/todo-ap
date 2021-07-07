@@ -1,5 +1,6 @@
 //****************PLAN.BLADE.JS************************ */
 
+
 var lastCliclkedCard;
 
 function openModal(){
@@ -10,9 +11,11 @@ function openModal(){
    
 }
 
-function myFunction(){
+
+$(document).on('click','#eklebtn',function(e){
+  e.preventDefault();
   $('#exampleModal').modal('toggle')
-}
+})
 
 
 $('#sortable1,#sortable2,#sortable3').click(function(){
@@ -26,20 +29,20 @@ $('#sortable1,#sortable2,#sortable3').click(function(){
 
 
 
-$('li').click(async function(){
-    let data;
-   
-   lastCliclkedCard=this.id;
-   console.log('bu bir li' + "idsi : " + this.id);
-   let baseUrl = window.location.origin;
-   let newUrl = baseUrl+"/jsonplan/"+ this.id;
-   data=loadDoc(newUrl)
+$(document ).on('click','li',async function(){
+  let data;
+ 
+ lastCliclkedCard=this.id;
+ //console.log('bu bir li' + "idsi : " + this.id);
+ let baseUrl = window.location.origin;
+ let newUrl = baseUrl+"/jsonplan/"+ this.id;
+ data=loadDoc(newUrl)
 
-   
-   
-   
+ 
+ 
+ 
 
-   //$($('#exampleModal').modal('toggle'))
+ //$($('#exampleModal').modal('toggle'))
 })
 
  
@@ -109,9 +112,7 @@ $('li').click(async function(){
             'Yeni bilgiler karta eklendi!',
             'success'
         )
-        // $("#col1").load(window.location.href +
-        //   "  #sortable1")
-         // $("#card-body").load(window.location.href + "#card-body" )
+        $('#plan_görev_row_idsi').load(window.location.href + "  #plan_görev_row_idsi");
           
         },
         error:function(error){
@@ -188,6 +189,7 @@ $(document).ready(function(){
               'Görev kartı silindi.',
               'success'
             )
+            $('#plan_görev_row_idsi').load(window.location.href + "  #plan_görev_row_idsi");
           },
           error:function(error){
             swalWithBootstrapButtons.fire(
@@ -214,6 +216,48 @@ $(document).ready(function(){
 })
 
 
+$(document).ready(function(){
+  $(document).on('submit','#kart_olustur',function(e){
+
+    e.preventDefault();
+    $.ajaxSetup({
+      cache:false,
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
+    $.ajax({
+      type:"get",
+      url:window.location.origin + "/kartolustur/" + getProjectIdWithURL(),
+      data:$('#kart_olustur').serialize(),
+      success:function(response){
+      
+        $('#exampleModal').modal('toggle')
+        Swal.fire(
+          'Başarılı!',
+          'Yeni kart eklendi!',
+          'success'
+        )
+      
+        $('#plan_görev_row_idsi').load(window.location.href + "  #plan_görev_row_idsi");
+      },
+      error: function(response){ Swal.fire(
+        'Opps!',
+        'Bir hata ile karşılaşıldı!',
+        'error'
+      )}
+    })
+
+  })
+})
+
+
+/*
+  !action="/kartolustur/{{ $id }}"  form action 
+*/
+
+
 /*************
  * todo : promise metodla gelen değeri bekle , 
  * todo : yeni oluşturcağın modalın değerlerine gelen verileri ata,
@@ -228,6 +272,7 @@ $(document).ready(function(){
 // $('#myModal').modal('toggle');
 // $('#myModal').modal('show');
 // $('#myModal').modal('hide');
+
 
 
 
