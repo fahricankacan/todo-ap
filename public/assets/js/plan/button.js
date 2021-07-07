@@ -112,7 +112,7 @@ $(document ).on('click','li',async function(){
             'Yeni bilgiler karta eklendi!',
             'success'
         )
-        $('#plan_görev_row_idsi').load(window.location.href + "  #plan_görev_row_idsi");
+        $('#plan_card_body_id').load(window.location.href + "  #plan_card_body_id");
           
         },
         error:function(error){
@@ -189,7 +189,7 @@ $(document).ready(function(){
               'Görev kartı silindi.',
               'success'
             )
-            $('#plan_görev_row_idsi').load(window.location.href + "  #plan_görev_row_idsi");
+            $('#plan_card_body_id').load(window.location.href + "  #plan_card_body_id");
           },
           error:function(error){
             swalWithBootstrapButtons.fire(
@@ -240,7 +240,7 @@ $(document).ready(function(){
           'success'
         )
       
-        $('#plan_görev_row_idsi').load(window.location.href + "  #plan_görev_row_idsi");
+        $('#plan_card_body_id').load(window.location.href + "  #plan_card_body_id");
       },
       error: function(response){ Swal.fire(
         'Opps!',

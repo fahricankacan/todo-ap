@@ -6,7 +6,7 @@
 
 
     <div class="card h-100 ">
-        <div class="card-body">
+        <div class="card-body" id="plan_card_body_id">
             <!----------------LİSTLER-------------------------->
             <div class="row ">
                 <div class="col-sm-4">
