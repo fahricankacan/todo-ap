@@ -37,11 +37,15 @@ use App\Models\ProjeGorevleri;
  * Auth 
  */
 
+
 Route::post('auth/save',[AuthController::class,'Save'])->name('auth.save');
 Route::post('auth/check',[AuthController::class,'Check'])->name('auth.check');
 Route::get('auth/logout',[AuthController::class,'Logout'])->name('auth.logout');
 
 Route::group(['middleware'=>['AuthCheck']],function (){
+
+    Route::get('/',[AuthController::class,'Login']);
+
     Route::get('auth/login',[AuthController::class,'Login'])->name('auth.login');
     Route::get('auth/register',[AuthController::class,'Register'])->name('auth.register');
    

@@ -46,12 +46,12 @@ class BilgiBankasiManager implements IBilgiBankasi
             $sonDosyaID=$this->DosyaEkle($request)->id;
         }
 
-        $bilgiBankasiCount= BilgiBankasi::count();
+        // $bilgiBankasiCount= BilgiBankasi::count();
 
-        if($bilgiBankasiCount>0){
+        // if($bilgiBankasiCount>0){
 
-            $sonDosyaID = BilgiBankasi::find($id)->dosya_id;
-        }
+        //     $sonDosyaID = BilgiBankasi::find($id)->dosya_id;
+        // }
 
         
         //dd(Personel::latest()->first());
@@ -59,7 +59,7 @@ class BilgiBankasiManager implements IBilgiBankasi
         BilgiBankasi::Create(
             [
                 'baslik' => $request->bilgi_basligi,
-                'aciklama' => $request->bilgi_aciklama,
+                'aciklama' => $request->bilg_aciklama,
                 'personel_id' => $request->selected_personel,
                 'dosya_id' => $sonDosyaID,
                 'proje_id' => $id

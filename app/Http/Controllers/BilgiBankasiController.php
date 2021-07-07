@@ -190,7 +190,7 @@ class BilgiBankasiController extends Controller
 
     public function Delete($id){
 
-        BilgiBankasi::find($id)->delete();
+        BilgiBankasi::destroy($id);
         return response()->json(['success' => 'Bilgi silindi.']);
     }
 }
