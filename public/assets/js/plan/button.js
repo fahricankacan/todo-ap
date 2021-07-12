@@ -33,16 +33,10 @@ $(document ).on('click','li',async function(){
   let data;
  
  lastCliclkedCard=this.id;
- //console.log('bu bir li' + "idsi : " + this.id);
  let baseUrl = window.location.origin;
  let newUrl = baseUrl+"/jsonplan/"+ this.id;
  data=loadDoc(newUrl)
 
- 
- 
- 
-
- //$($('#exampleModal').modal('toggle'))
 })
 
  
@@ -51,10 +45,6 @@ $(document ).on('click','li',async function(){
    var id = url.substring(url.lastIndexOf('/') + 1);
    return id;
  }
-
-//  OpenModal= function(data){
-//    document.getElementById
-//  }
 
 
  async function loadDoc($url) {
@@ -182,7 +172,7 @@ $(document).ready(function(){
           type:"POST",
           url:window.location.origin +"/sil/"+lastCliclkedCard,
           success:function(response){   
-            // console.log(response)
+            
             $('#updateModal').modal('hide')
             swalWithBootstrapButtons.fire(
               'Silindi!',
@@ -251,34 +241,3 @@ $(document).ready(function(){
 
   })
 })
-
-
-/*
-  !action="/kartolustur/{{ $id }}"  form action 
-*/
-
-
-/*************
- * todo : promise metodla gelen değeri bekle , 
- * todo : yeni oluşturcağın modalın değerlerine gelen verileri ata,
- * todo : modalı çağır
- */
-
-//https://www.w3schools.com/js/js_promise.asp 
-
-
-
-
-// $('#myModal').modal('toggle');
-// $('#myModal').modal('show');
-// $('#myModal').modal('hide');
-
-
-
-
-
-
-//**************************Modala data yükeleme**************************************************** */
-//https://www.tutorialsplane.com/pass-data-to-bootstrap-modal/
-
-//https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal

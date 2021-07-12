@@ -53,6 +53,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(\App\Bussiness\Abstract\ISozlesmeService::class,function(){
             return new \App\Bussiness\Concrate\SozlesmeManager();
         });
+        $this->app->singleton(\App\Bussiness\Abstract\ICalendar::class,function(){
+            return new \App\Bussiness\Concrate\CalendarManager();
+        });
        
 
        

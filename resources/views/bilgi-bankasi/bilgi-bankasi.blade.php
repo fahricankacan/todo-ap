@@ -562,7 +562,7 @@
 
 
         //yeni bilgi butonuna tıklandığında bilgi ekleme modalını açar
-        $('#yeni-bilgi-olustur-button').on('click', function(e) {
+        $(document).on('click','#yeni-bilgi-olustur-button', function(e) {
             $('#yenibilgiBankasiModal').modal('show');
 
         })

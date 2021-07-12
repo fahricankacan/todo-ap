@@ -15,10 +15,11 @@ use App\Http\Controllers\ProjeDurumController;
 use App\Http\Controllers\ProjeGorevleriController;
 use App\Http\Controllers\ProjePlanController;
 use App\Http\Controllers\ProjePlanlariController;
+use App\Http\Controllers\RandevuController;
 use App\Http\Controllers\SozlesmeController;
 use App\Models\BilgiBankasi;
 use App\Models\ProjeGorevleri;
-
+use App\Http\Controllers\CalendarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,13 +42,14 @@ use App\Models\ProjeGorevleri;
 Route::post('auth/save',[AuthController::class,'Save'])->name('auth.save');
 Route::post('auth/check',[AuthController::class,'Check'])->name('auth.check');
 Route::get('auth/logout',[AuthController::class,'Logout'])->name('auth.logout');
+Route::get('auth/register',[AuthController::class,'Register'])->name('auth.register');
 
 Route::group(['middleware'=>['AuthCheck']],function (){
 
     Route::get('/',[AuthController::class,'Login']);
 
     Route::get('auth/login',[AuthController::class,'Login'])->name('auth.login');
-    Route::get('auth/register',[AuthController::class,'Register'])->name('auth.register');
+    
    
    
     Route::resource('/proje', ProjeControllerer::class);
@@ -144,6 +146,19 @@ Route::resource('/sozlesme', SozlesmeController::class);
  */
 
  Route::resource('/projedurum', ProjeDurumController::class);
+ 
+
+
+/**
+ * Randevu
+ * 
+ */
+
+ Route::get('/randevu', [CalendarController::class,'index'])->name('randevu.index');
+ Route::get('/randevu/load',[CalendarController::class,'show'])->name('randevu.show');
+ Route::post('randevu/store',[CalendarController::class,'store'])->name('randevu.store');
+
+ //Route::get('/plan/{id}',[PlanController::class,'index'])->name('plan.index');
 
 });
 

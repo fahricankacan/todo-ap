@@ -41,9 +41,9 @@ class BilgiBankasiManager implements IBilgiBankasi
 
     public function AddBilgi($request, $id)
     {
-        $sonDosyaID=null;
-        if(!empty($request->file())){
-            $sonDosyaID=$this->DosyaEkle($request)->id;
+        $sonDosyaID = null;
+        if (!empty($request->file())) {
+            $sonDosyaID = $this->DosyaEkle($request)->id;
         }
 
         // $bilgiBankasiCount= BilgiBankasi::count();
@@ -53,7 +53,7 @@ class BilgiBankasiManager implements IBilgiBankasi
         //     $sonDosyaID = BilgiBankasi::find($id)->dosya_id;
         // }
 
-        
+
         //dd(Personel::latest()->first());
 
         BilgiBankasi::Create(
@@ -69,25 +69,26 @@ class BilgiBankasiManager implements IBilgiBankasi
     }
 
 
-    public function UpdateBilgi($request, $id){
-        
-     //  $dosya= $request->file();
-        $sonDosya=null;
-        if(!empty($request->file())){
-            $sonDosyaID=$this->DosyaEkle($request)->id;
+    public function UpdateBilgi($request, $id)
+    {
+
+        //  $dosya= $request->file();
+        $sonDosya = null;
+        if (!empty($request->file())) {
+            $sonDosyaID = $this->DosyaEkle($request)->id;
         }
-       
+
         $sonDosya = BilgiBankasi::find($id)->dosya_id;
 
-        $bilgi=BilgiBankasi::where('id','=',$id)->update(
+        $bilgi = BilgiBankasi::where('id', '=', $id)->update(
             [
-                'baslik'=>$request->baslik,
-                'aciklama'=>$request->acilama,
-                'personel_id' =>$request->personel_sec,
-                'dosya_id' =>$sonDosya,
+                'baslik' => $request->baslik,
+                'aciklama' => $request->acilama,
+                'personel_id' => $request->personel_sec,
+                'dosya_id' => $sonDosya,
             ]
         );
-       //protected $fillable = ['id','proje_id','dosya_id','baslik','aciklama','activity_id',"personel_id"];
+        //protected $fillable = ['id','proje_id','dosya_id','baslik','aciklama','activity_id',"personel_id"];
 
     }
 
@@ -99,7 +100,7 @@ class BilgiBankasiManager implements IBilgiBankasi
     private function DosyaEkle($request)
     {
         $fileName = $request->dosya_ekle->getClientOriginalName();
-        $fileNameWithUpperFile=$request->dosya_ekle->storeAs('dosyalar', $request->dosya_ekle->getClientOriginalName());
+        $fileNameWithUpperFile = $request->dosya_ekle->storeAs('dosyalar', $request->dosya_ekle->getClientOriginalName());
 
         Dosya::Create(
             [
@@ -111,42 +112,62 @@ class BilgiBankasiManager implements IBilgiBankasi
         return Dosya::latest()->first();
     }
 
-    public function TotalTicket($id){
-      $totalTicket=BilgiBankasi::where('proje_id', '=', $id)->count();
-      return $totalTicket;
+    public function TotalTicket($id)
+    {
+        $totalTicket = BilgiBankasi::where('proje_id', '=', $id)->count();
+        return $totalTicket;
     }
-    public function TotalResolvedTickets($id){
-        $totalResolvedTickets =BilgiBankasi::where('activity_id','=',2)->count();
+    public function TotalResolvedTickets($id)
+    {
+        $totalResolvedTickets = BilgiBankasi::where('activity_id', '=', 2)->count();
         return $totalResolvedTickets;
-        
     }
-    public function TotalClosedTickets($id){
-        $TotalClosedTickets=BilgiBankasi::where('activity_id','=',3)->count();
+    public function TotalClosedTickets($id)
+    {
+        $TotalClosedTickets = BilgiBankasi::where('activity_id', '=', 3)->count();
         return $TotalClosedTickets;
-
     }
-    public function TotalActiveTickets($id){
-        $totalActiveTickets = BilgiBankasi::where('activity_id','=',1)->count();
+    public function TotalActiveTickets($id)
+    {
+        $totalActiveTickets = BilgiBankasi::where('activity_id', '=', 1)->count();
         return $totalActiveTickets;
     }
-    public function TotalREsponseTime($id){
-        $firstBilgi = BilgiBankasi::where('activity_id', '=',1)->first();
-        $sonBilgi = BilgiBankasi::where('activity_id', '=',3)->get()->last();
+    public function TotalREsponseTime($id)
+    {
 
-        $firstTime = $firstBilgi->created_at;
-        $LasttTime = $firstBilgi->updated_at;
+        $firstBilgiID = 1;
+        $sonBilgiID = 1;
+        $firstBilgi = BilgiBankasi::where('activity_id', '=', $firstBilgiID)->first();
+        $sonBilgi = BilgiBankasi::where('activity_id', '=', $sonBilgiID)->get()->last();
 
-        $diff = $firstTime->diffInSeconds($LasttTime);
-        $totalDuration=gmdate('H:i:s', $diff);
+        while (!empty($firstBilgi) && !empty($sonBilgi)) {
+           
 
-        return $totalDuration;
+            if (!empty($firstBilgi)) {
+                $firstTime = $firstBilgi->created_at;
+                $LasttTime = $firstBilgi->updated_at;
 
+                $diff = $firstTime->diffInSeconds($LasttTime);
+                $totalDuration = gmdate('H:i:s', $diff);
+
+                return $totalDuration;
+            } else {
+
+                if (BilgiBankasi::count() != 0) {
+
+                    $firstBilgiID += 1;
+
+                }else{
+                    return ;
+                }
+            }
+        }
     }
 
-    public function AllTicketCount(){
+    public function AllTicketCount()
+    {
         $count = BilgiBankasi::count();
 
         return $count;
     }
-
 }
