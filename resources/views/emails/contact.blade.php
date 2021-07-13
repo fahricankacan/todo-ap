@@ -1,7 +1,12 @@
 @component('mail::message')
 # Todo App 
 
-Todo app deneme maili
+@if (!empty($mailText))
+    {{ $mailText }}
+@else
+    boş mail 
+@endif
+    
 
 @component('mail::button', ['url' => 'http://127.0.0.1:8000/'])
 Button Text

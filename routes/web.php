@@ -20,6 +20,8 @@ use App\Http\Controllers\SozlesmeController;
 use App\Models\BilgiBankasi;
 use App\Models\ProjeGorevleri;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\iletisimController;
+use App\Http\Controllers\SendEmailController;
 use App\Mail\Contact;
 use Illuminate\Support\Facades\Mail;
 
@@ -34,11 +36,29 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
+//Mail Gönder  Controller
 
-Route::get('/email', function () {
-    Mail::to('fahrican.kcn@gmail.com')->send(new Contact());
-    return new Contact();
-});
+Route::post('sendemail/musteri',[SendEmailController::class,'SendMailToCustomer'])->name('sendemail.musteri');
+Route::post('sendemail/personel',[SendEmailController::class,'SendMailToPersonel'])->name('sendemail.personel');
+Route::post('sendemail/custom',[SendEmailController::class,'SendMailToCustomPerson'])->name('sendmail.custom');
+
+
+
+//iletisim Controller routing
+Route::get('iletisim/index',[iletisimController::class,'index'])->name('iletisim.index');
+Route::get('iletisim/musteri',[iletisimController::class,'musteri'])->name('iletisim.musteri');
+Route::get('iletisim/personel',[iletisimController::class,'personel'])->name('iletisim.personel');
+Route::get('iletisim/custom',[iletisimController::class,'custom'])->name('iletisim.custom');
+
+
+
+
+// Route::get('/email', function () {
+//     Mail::to('fahrican.kcn@gmail.com')->send(new Contact("dgdfglkdfgsa"));
+//     //return new Contact("dgdfglkdfgsa");
+//      return redirect('iletisim/index');
+    
+// });
 
 
 /**

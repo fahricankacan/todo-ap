@@ -63,7 +63,7 @@
                                 class="nav-link active">Listele</a></li>
                         <li class="nav-item"><a href="{{ route('musteri.create') }}"
                                 class="nav-link active">Oluştur</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link active">Randevu</a></li>
+                        
                     </ul>
                 </li>
                 <li class="nav-item nav-item-submenu ">
@@ -133,7 +133,7 @@
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-color-sampler"></i> <span>İletişim</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="#" class="nav-link active"> Mail Gönder</a>
+                        <li class="nav-item"><a href="{{ route('iletisim.index') }}" class="nav-link active"> Mail Gönder</a>
                         </li>
 
                     </ul>

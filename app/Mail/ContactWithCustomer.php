@@ -7,22 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class Contact extends Mailable
+class ContactWithCustomer extends Mailable
 {
     use Queueable, SerializesModels;
 
-
-    private $_mailText = "";
-    private $_mailHeader ="";
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($mailText)
+    public function __construct()
     {
-       
-        $this->_mailText=$mailText;
+        //
     }
 
     /**
@@ -32,7 +28,6 @@ class Contact extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.contact',['mailText'=>$this->_mailText,
-        ]);
+        return $this->markdown('emails.contactwithcustomer');
     }
 }
