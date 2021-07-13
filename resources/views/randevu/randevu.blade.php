@@ -21,7 +21,8 @@
     </div>
 
 
-    <script>
+    <script src="{{ URL::asset('assets/js/randevu/ajanda.js') }}"></script>
+    {{-- <script>
         $(document).ready(function() {
 
             $('#car_header_id').html("Ajanda");
@@ -140,7 +141,7 @@
             });
         })
     </script>
-
+ --}}
 
 
 
