@@ -66,21 +66,6 @@ class CalendarController extends Controller
 
                 return response()->json($event);
             }
-            if ($request->type == 'update') {
-                $event = calendar_event::find($request->id)->update([
-                    'title'        =>    $request->title,
-                    'start'        =>    $request->start,
-                    'end'        =>    $request->end
-                ]);
-
-                return response()->json($event);
-            }
-
-            if ($request->type == 'delete') {
-                $event = calendar_event::find($request->id)->delete();
-
-                return response()->json($event);
-            }
         }
     }
 
@@ -114,9 +99,20 @@ class CalendarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if ($request->ajax()) {
+
+            if ($request->type == 'update') {
+                $event = calendar_event::find($request->id)->update([
+                    'title'        =>    $request->title,
+                    'start'        =>    $request->start,
+                    'end'        =>    $request->end
+                ]);
+
+                return response()->json($event);
+            }
+        }
     }
 
     /**
@@ -125,8 +121,15 @@ class CalendarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->ajax()) {
+
+            if ($request->type == 'delete') {
+                // $event = calendar_event::find($request->id)->delete();
+                $event = calendar_event::destroy($request->id);
+                return response()->json($event);
+            }
+        }
     }
 }

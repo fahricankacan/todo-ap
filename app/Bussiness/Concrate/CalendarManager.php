@@ -21,4 +21,15 @@ class CalendarManager implements ICalendar{
         ) ;
         return $calendarData;
     }
+
+    public function Add($request){
+        
+    }
+
+    public function Delete($request){
+
+    }
+    public function Update($request){
+
+    }
 }

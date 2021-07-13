@@ -20,6 +20,8 @@ use App\Http\Controllers\SozlesmeController;
 use App\Models\BilgiBankasi;
 use App\Models\ProjeGorevleri;
 use App\Http\Controllers\CalendarController;
+use App\Mail\Contact;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,11 @@ use App\Http\Controllers\CalendarController;
 |
 */
 
+
+Route::get('/email', function () {
+    Mail::to('fahrican.kcn@gmail.com')->send(new Contact());
+    return new Contact();
+});
 
 
 /**
@@ -157,8 +164,15 @@ Route::resource('/sozlesme', SozlesmeController::class);
  Route::get('/randevu', [CalendarController::class,'index'])->name('randevu.index');
  Route::get('/randevu/load',[CalendarController::class,'show'])->name('randevu.show');
  Route::post('randevu/store',[CalendarController::class,'store'])->name('randevu.store');
+ Route::post('randevu/update',[CalendarController::class,'update'])->name('randevu.update');
+ Route::post('randevu/destroy',[CalendarController::class,'destroy'])->name('randevu.destroy');
 
  //Route::get('/plan/{id}',[PlanController::class,'index'])->name('plan.index');
+
+
+//Route for mailing
+
+
 
 });
 

@@ -25,7 +25,7 @@
         $(document).ready(function() {
 
             $('#car_header_id').html("Ajanda");
-            $('#card_header_aciklama_id').html("Açıklama dfkgdfg");
+            $('#card_header_aciklama_id').html("Hücreye tıklayark yeni plan oluşturulur. ");
 
             $.ajaxSetup({
                 headers: {
@@ -80,7 +80,7 @@
                     var title = event.title;
                     var id = event.id;
                     $.ajax({
-                        url: "/randevu/store",
+                        url: "/randevu/update",
                         type: "POST",
                         data: {
                             title: title,
@@ -101,7 +101,7 @@
                     var title = event.title;
                     var id = event.id;
                     $.ajax({
-                        url: "/randevu/store",
+                        url: "/randevu/update",
                         type: "POST",
                         data: {
                             title: title,
@@ -121,7 +121,7 @@
                     if (confirm("Are you sure you want to remove it?")) {
                         var id = event.id;
                         $.ajax({
-                            url: "/randevu/store",
+                            url: "/randevu/destroy",
                             type: "POST",
                             data: {
                                 id: id,
